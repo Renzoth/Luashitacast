@@ -27,6 +27,9 @@ local Settings = {
 
 profile.OnLoad = function()
     gSettings.AllowAddSet = true;
+
+    AshitaCore:GetChatManager():QueueCommand(1, '/macro book 3');
+    AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
 end
 
 profile.OnUnload = function()
