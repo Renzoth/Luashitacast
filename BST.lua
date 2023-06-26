@@ -1,20 +1,20 @@
 local profile = {};
 local sets = {
-    ['Idle'] = {
-        Main = 'Viking Axe',
-        Sub = 'Barbaroi Axe',
-        Head = 'Emperor Hairpin',
-        Neck = 'Peacock Amulet',
-        Ear1 = 'Spike Earring',
-        Ear2 = 'Spike Earring',
-        Body = 'Haubergeon',
-        Hands = 'Alumine Moufles',
-        Ring1 = 'Courage Ring',
-        Ring2 = 'Balance Ring',
-        Back = 'Traveler\'s Mantle',
-        Waist = 'Swift Belt',
-        Legs = 'Ryl.Kgt. Breeches',
-        Feet = 'Alumine Sollerets',
+    ['Idle_Priority'] = {
+        Main = {'Viking Axe'},
+        Sub = {'Barbaroi Axe'},
+        Head = {'Emperor Hairpin'},
+        Neck = {'Peacock Amulet'},
+        Ear1 = {'Spike Earring'},
+        Ear2 = {'Spike Earring'},
+        Body = {'Haubergeon', 'Alumine Haubert'},
+        Hands = {'Alumine Moufles'},
+        Ring1 = {'Courage Ring'},
+        Ring2 = {'Balance Ring'},
+        Back = {'Amemet Mantle', 'Traveler\'s Mantle'},
+        Waist = {'Swift Belt'},
+        Legs = {'Ryl.Kgt. Breeches', 'Republic Subligar'},
+        Feet = {'Alumine Sollerets'},
     },
     ['Str'] = {
         Neck = 'Spike Necklace',
@@ -41,6 +41,10 @@ profile.Sets = sets;
 profile.Packer = {
 };
 
+local Settings = {
+    currentLevel = 0,
+}
+
 profile.OnLoad = function()
     gSettings.AllowAddSet = true;
 end
@@ -53,6 +57,12 @@ end
 
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
+    local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
+
+    if (myLevel ~= Settings.CurrentLevel) then
+        gFunc.EvaluateLevels(profile.Sets, myLevel);
+        Settings.CurrentLevel = myLevel;
+    end
 
     if (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Resting);
@@ -63,10 +73,18 @@ end
 
 profile.HandleAbility = function()
     local ability = gData.GetAction();
+    local player = gData.GetPlayer();
 
     if (ability.Name == "Charm") then
         gFunc.EquipSet(sets.Chr);
     elseif (ability.Name == "Reward") then
+        if (player.MainJobSync < 48) then
+            gFunc.Equip('Ammo', 'Pet Food Beta')
+        elseif (player.MainJobSync < 60) then
+            gFunc.Equip('Ammo', 'Pet Food Delta')
+        else 
+            gFunc.Equip('Ammo', 'Pet Food Epsilon')
+        end
         gFunc.EquipSet(sets.Mnd);
     end
 end
@@ -78,9 +96,9 @@ profile.HandlePrecast = function()
 end
 
 profile.HandleMidcast = function()
-    local spell = gData.GetAction();
+    local action = gData.GetAction();
 
-    if (spell.Name == "Cure") or (spell.Name == "Cure II") then
+    if (string.match(action.Name, 'Cure')) then
         gFunc.EquipSet(sets.Mnd);
     end
 end
