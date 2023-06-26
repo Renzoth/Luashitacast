@@ -1,8 +1,8 @@
 local profile = {};
 local sets = {
     ['Idle_Priority'] = {
-        Main = {'Viking Axe'},
-        Sub = {'Barbaroi Axe'},
+        Main = {'Darksteel Pick', 'Viking Axe'},
+        Sub = {'Darksteel Pick', 'Barbaroi Axe'},
         Head = {'Emperor Hairpin'},
         Neck = {'Peacock Amulet'},
         Ear1 = {'Spike Earring'},
@@ -83,7 +83,7 @@ profile.HandleAbility = function()
         elseif (player.MainJobSync < 60) then
             gFunc.Equip('Ammo', 'Pet Food Delta')
         else 
-            gFunc.Equip('Ammo', 'Pet Food Epsilon')
+            gFunc.Equip('Ammo', 'Pet Fd. Epsilon')
         end
         gFunc.EquipSet(sets.Mnd);
     end
