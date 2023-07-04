@@ -1,7 +1,7 @@
 local profile = {};
 local sets = {
     ['Idle_Priority'] = {
-        Main = { 'Kukulcan\'s Staff', 'Lgn. Staff' },
+        Main = {'Earth Staff', 'Kukulcan\'s Staff', 'Lgn. Staff' },
         Head = {'Silver Hairpin'},
         Neck = {'Justice Badge'},
         Ear1 = {'Energy Earring'},
@@ -13,7 +13,7 @@ local sets = {
         Back = {'White Cape'},
         Waist = {'Friar\'s Rope'},
         Legs = {'Savage Loincloth', 'Baron\'s Slops'},
-        Feet = {'San d\'Orian Clogs'},
+        Feet = {'Evoker\'s Pigaches', 'San d\'Orian Clogs'},
     },
 };
 profile.Sets = sets;
@@ -59,8 +59,17 @@ profile.HandleDefault = function()
     if (pet ~= nil) then
         -- gFunc.Message(pet.Name)
         if (pet.Name == 'Carbuncle') then
+            gFunc.Equip('Main', 'Light Staff');
             gFunc.Equip('Hands', 'Carbuncle Mitts');
+        elseif (pet.Name == 'Garuda') then
+            gFunc.Equip('Main', 'Wind Staff');
+        elseif (pet.Name == 'Titan') then
+            gFunc.Equip('Main', 'Earth Staff');
+        elseif (pet.Name == 'Fenrir') or (pet.Name == 'Diabolos') then
+            gFunc.Equip('Main', 'Dark Staff');
         end
+        gFunc.Equip('Body', 'Austere Robe');
+        gFunc.Equip('Legs', 'Evoker\'s Spatsa');
     end
 end
 
@@ -74,6 +83,10 @@ profile.HandlePrecast = function()
 end
 
 profile.HandleMidcast = function()
+    local action = gData.GetAction();
+    if (string.match(action.Name, 'Cure')) then
+        gFunc.Equip('Main', 'Light Staff');
+    end
 end
 
 profile.HandlePreshot = function()
