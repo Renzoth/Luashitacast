@@ -3,7 +3,7 @@ local sets = {
     ['Idle_Priority'] = {
         Main = {'Earth Staff', 'Kukulcan\'s Staff', 'Lgn. Staff' },
         -- Head = {'', 'Silver Hairpin'},
-        Neck = {'Justice Badge'},
+        Neck = {'Smn. Torque', 'Justice Badge'},
         Ear1 = {'Energy Earring'},
         Ear2 = {'Energy Earring'},
         Body = {'Vermillion Cloak', 'Seer\'s Tunic', 'Doublet'},
@@ -143,6 +143,7 @@ profile.HandleDefault = function()
     end
 
     -- SANDY IS THE BEST FUCK WINDY FUCK MIMI
+    -- gFunc.Message(env.Area);
     if (string.match(env.Area, 'San d\'Oria')) then
         gFunc.Equip('Head', 'Evoker\'s Horn');
         gFunc.Equip('Body', 'Kingdom Aketon');
@@ -166,6 +167,7 @@ profile.HandleMidcast = function()
 
     if (action.Type == 'Summoning') then
         gFunc.Equip('Head', 'Evoker\'s Horn');
+        gFunc.Equip('Neck', 'Smn. Torque');
         gFunc.Equip('Body', 'Evoker\'s Doublet');
     end
 end
