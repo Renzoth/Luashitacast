@@ -2,10 +2,10 @@ local profile = {};
 local sets = {
     ['Idle_Priority'] = {
         Main = {'Darksteel Pick', 'Viking Axe'},
-        Sub = {'Darksteel Pick', 'Barbaroi Axe'},
+        Sub = {'Viking Axe', 'Barbaroi Axe'},
         Head = {'Emperor Hairpin'},
         Neck = {'Peacock Amulet'},
-        Ear1 = {'Spike Earring'},
+        Ear1 = {'Beastly Earring', 'Spike Earring'},
         Ear2 = {'Spike Earring'},
         Body = {'Haubergeon', 'Alumine Haubert'},
         Hands = {'Alumine Moufles'},
@@ -22,17 +22,21 @@ local sets = {
         Waist = 'Ryl.Kgt. Belt',
         Feet = 'Savage Gaiters',
     },
-    ['Mnd'] = {
+    ['Reward'] = {
         Neck = 'Justice Badge',
+        Body = 'Beast Jackcoat',
         Hands = 'Savage Gauntlets',
         Ring1 = 'Saintly Ring',
         Waist = 'Ryl.Kgt. Belt',
         Legs = 'Savage Loincloth',
+        Feet = 'Beast Gaiters',
     },
-    ['Chr'] = {
+    ['Charm'] = {
         Head = 'Noble\'s Ribbon',
         Neck = 'Bird Whistle',
         Waist = 'Ryl.Kgt. Belt',
+        Legs = 'Beast Trousers',
+        Feet = 'Beast Gaiters',
         Ring1 = 'Hope Ring',
     },
 };
@@ -76,7 +80,7 @@ profile.HandleAbility = function()
     local player = gData.GetPlayer();
 
     if (ability.Name == "Charm") then
-        gFunc.EquipSet(sets.Chr);
+        gFunc.EquipSet(sets.Charm);
     elseif (ability.Name == "Reward") then
         if (player.MainJobSync < 48) then
             gFunc.Equip('Ammo', 'Pet Food Beta')
@@ -85,7 +89,7 @@ profile.HandleAbility = function()
         else 
             gFunc.Equip('Ammo', 'Pet Fd. Epsilon')
         end
-        gFunc.EquipSet(sets.Mnd);
+        gFunc.EquipSet(sets.Reward);
     end
 end
 
@@ -99,7 +103,7 @@ profile.HandleMidcast = function()
     local action = gData.GetAction();
 
     if (string.match(action.Name, 'Cure')) then
-        gFunc.EquipSet(sets.Mnd);
+        gFunc.EquipSet(sets.Reward);
     end
 end
 
