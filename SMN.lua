@@ -2,7 +2,7 @@ local profile = {};
 local sets = {
     ['Idle_Priority'] = {
         Main = {'Earth Staff', 'Kukulcan\'s Staff', 'Lgn. Staff' },
-        Head = {'Silver Hairpin'},
+        -- Head = {'', 'Silver Hairpin'},
         Neck = {'Justice Badge'},
         Ear1 = {'Energy Earring'},
         Ear2 = {'Energy Earring'},
@@ -50,26 +50,42 @@ profile.HandleDefault = function()
 
     if (player.Status == 'Resting') then
         gFunc.Equip('Main', 'Dark Staff');
-        gFunc.Equip('Body', 'Seer\'s Tunic');
+        if (player.MainJobSync < 59) then
+            gFunc.Equip('Body', 'Seer\'s Tunic');
+        end
         gFunc.Equip('Legs', 'Baron\'s Slops');
     else
         gFunc.EquipSet('Idle');
+        if (player.MainJobSync < 59) then
+            gFunc.Equip('Head', 'Silver Hairpin');
+        end
     end
 
     if (pet ~= nil) then
         -- gFunc.Message(pet.Name)
+        gFunc.Equip('Legs', 'Evoker\'s Spats');
+
         if (pet.Name == 'Carbuncle') then
             gFunc.Equip('Main', 'Light Staff');
+            gFunc.Equip('Body', 'Vermillion Cloak');
             gFunc.Equip('Hands', 'Carbuncle Mitts');
-        elseif (pet.Name == 'Garuda') then
-            gFunc.Equip('Main', 'Wind Staff');
-        elseif (pet.Name == 'Titan') then
-            gFunc.Equip('Main', 'Earth Staff');
-        elseif (pet.Name == 'Fenrir') or (pet.Name == 'Diabolos') then
-            gFunc.Equip('Main', 'Dark Staff');
+        else
+            gFunc.Equip('Head', 'Evoker\'s Horn');
+            gFunc.Equip('Body', 'Austere Robe');
+            if (pet.Name == 'Garuda') then
+                gFunc.Equip('Main', 'Wind Staff');
+            elseif (pet.Name == 'Titan') then
+                gFunc.Equip('Main', 'Earth Staff');
+            elseif (pet.Name == 'Ifrit') then
+                gFunc.Equip('Main', 'Fire Staff');
+            elseif (pet.Name == 'Fenrir') or (pet.Name == 'Diabolos') then
+                gFunc.Equip('Main', 'Dark Staff');
+            elseif (pet.Name == 'LightSpirit') then
+                gFunc.Equip('Main', 'Light Staff');
+            end
         end
-        gFunc.Equip('Body', 'Austere Robe');
-        gFunc.Equip('Legs', 'Evoker\'s Spatsa');
+
+        
     end
 end
 
@@ -86,6 +102,11 @@ profile.HandleMidcast = function()
     local action = gData.GetAction();
     if (string.match(action.Name, 'Cure')) then
         gFunc.Equip('Main', 'Light Staff');
+    end
+
+    if (action.Type == 'Summoning') then
+        gFunc.Equip('Head', 'Evoker\'s Horn');
+        gFunc.Equip('Body', 'Evoker\'s Doublet');
     end
 end
 
