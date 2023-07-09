@@ -91,7 +91,7 @@ profile.HandleDefault = function()
 
         if (pet.Name == 'Carbuncle') then
             if (day.Day == 'Lightsday') then
-                -- gFung.Equip('Body', )
+                -- gFunc.Equip('Body', )
             end
             gFunc.Equip('Main', 'Light Staff');
             gFunc.Equip('Body', 'Vermillion Cloak');
@@ -101,32 +101,32 @@ profile.HandleDefault = function()
             gFunc.Equip('Body', 'Austere Robe');
             if (pet.Name == 'Garuda') then
                 if (day.Day == 'Windsday') then
-                    -- gFung.Equip('Body', )
+                    -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Wind Staff');
             elseif (pet.Name == 'Titan') then
                 if (day.Day == 'Earthsday') then
-                    -- gFung.Equip('Body', )
+                    -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Earth Staff');
             elseif (pet.Name == 'Ifrit') then
                 if (day.Day == 'Firesday') then
-                    -- gFung.Equip('Body', )
+                    -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Fire Staff');
             elseif (pet.Name == 'Fenrir') or (pet.Name == 'Diabolos') then
                 if (day.Day == 'Darksday') then
-                    -- gFung.Equip('Body', )
+                    -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Dark Staff');
             elseif (pet.Name == 'Shiva') then
                 if (day.Day == 'Iceday') then
-                    -- gFung.Equip('Body', )
+                    -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Ice Staff');
             elseif (pet.Name == 'Ramuh') then
                 if (day.Day == 'Lightningday') then
-                    -- gFung.Equip('Body', )
+                    -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Ice Staff');
             elseif (pet.Name == 'LightSpirit') then
