@@ -15,6 +15,9 @@ local sets = {
         Legs = {'Savage Loincloth', 'Baron\'s Slops'},
         Feet = {'Evoker\'s Pigaches', 'San d\'Orian Clogs'},
     },
+    ['Fishing'] = {
+        Range = 'Halcyon Rod',
+    }
 };
 profile.Sets = sets;
 
@@ -22,10 +25,14 @@ profile.Packer = {
 };
 
 local Settings = {
-    currentLevel = 0,
+    currentLevel = 0;
+    fishing = false;
 }
 
 profile.OnLoad = function()
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /fishing /lac fwd fishing');
+
+
     gSettings.AllowAddSet = true;
 
     AshitaCore:GetChatManager():QueueCommand(1, '/macro book 3');
@@ -33,9 +40,20 @@ profile.OnLoad = function()
 end
 
 profile.OnUnload = function()
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /fishing');
+
 end
 
 profile.HandleCommand = function(args)
+    if (args[1] == 'fishing') then
+        if (Settings.fishing == true) then
+            gFunc.Message('Fishing Off');
+            Settings.fishing = false;
+        else
+            gFunc.Message('Fishing On');
+            Settings.fishing = true;
+        end
+    end
 end
 
 profile.HandleDefault = function()
@@ -55,9 +73,14 @@ profile.HandleDefault = function()
         end
         gFunc.Equip('Legs', 'Baron\'s Slops');
     else
-        gFunc.EquipSet('Idle');
-        if (player.MainJobSync < 59) then
-            gFunc.Equip('Head', 'Silver Hairpin');
+        if (Settings.fishing == false) then
+            gFunc.EquipSet('Idle');
+
+            if (player.MainJobSync < 59) then
+                gFunc.Equip('Head', 'Silver Hairpin');
+            end
+        elseif (Settings.fishing == true) then
+            gFunc.EquipSet('Fishing');
         end
     end
 
