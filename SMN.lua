@@ -59,13 +59,15 @@ end
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
     local pet = gData.GetPet();
-    local day = gData.GetEnvironment();
+    local env = gData.GetEnvironment();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
 
     if (myLevel ~= Settings.CurrentLevel) then
         gFunc.EvaluateLevels(profile.Sets, myLevel);
         Settings.CurrentLevel = myLevel;
     end
+
+    -- gFunc.Message(env.Area)
 
     if (player.Status == 'Resting') then
         gFunc.Equip('Main', 'Dark Staff');
@@ -90,7 +92,7 @@ profile.HandleDefault = function()
         gFunc.Equip('Legs', 'Evoker\'s Spats');
 
         if (pet.Name == 'Carbuncle') then
-            if (day.Day == 'Lightsday') then
+            if (env.Day == 'Lightsday') then
                 -- gFunc.Equip('Body', )
             end
             gFunc.Equip('Main', 'Light Staff');
@@ -100,37 +102,37 @@ profile.HandleDefault = function()
             gFunc.Equip('Head', 'Evoker\'s Horn');
             gFunc.Equip('Body', 'Austere Robe');
             if (pet.Name == 'Garuda') then
-                if (day.Day == 'Windsday') then
+                if (env.Day == 'Windsday') then
                     -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Wind Staff');
             elseif (pet.Name == 'Titan') then
-                if (day.Day == 'Earthsday') then
+                if (env.Day == 'Earthsday') then
                     -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Earth Staff');
             elseif (pet.Name == 'Ifrit') then
-                if (day.Day == 'Firesday') then
+                if (env.Day == 'Firesday') then
                     -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Fire Staff');
             elseif (pet.Name == 'Fenrir') or (pet.Name == 'Diabolos') then
-                if (day.Day == 'Darksday') then
+                if (env.Day == 'Darksday') then
                     -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Dark Staff');
             elseif (pet.Name == 'Shiva') then
-                if (day.Day == 'Iceday') then
+                if (env.Day == 'Iceday') then
                     -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Ice Staff');
             elseif (pet.Name == 'Leviathan') then
-                if (day.Day == 'Watersday') then
+                if (env.Day == 'Watersday') then
                     -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Water Staff');
             elseif (pet.Name == 'Ramuh') then
-                if (day.Day == 'Lightningday') then
+                if (env.Day == 'Lightningday') then
                     -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Ice Staff');
@@ -138,8 +140,12 @@ profile.HandleDefault = function()
                 gFunc.Equip('Main', 'Light Staff');
             end
         end
+    end
 
-        
+    -- SANDY IS THE BEST FUCK WINDY FUCK MIMI
+    if (string.match(env.Area, 'San d\'Oria')) then
+        gFunc.Equip('Head', 'Evoker\'s Horn');
+        gFunc.Equip('Body', 'Kingdom Aketon');
     end
 end
 
