@@ -124,6 +124,11 @@ profile.HandleDefault = function()
                     -- gFunc.Equip('Body', )
                 end
                 gFunc.Equip('Main', 'Ice Staff');
+            elseif (pet.Name == 'Leviathan') then
+                if (day.Day == 'Watersday') then
+                    -- gFunc.Equip('Body', )
+                end
+                gFunc.Equip('Main', 'Water Staff');
             elseif (pet.Name == 'Ramuh') then
                 if (day.Day == 'Lightningday') then
                     -- gFunc.Equip('Body', )
