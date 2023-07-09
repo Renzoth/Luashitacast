@@ -99,8 +99,8 @@ profile.HandleMidcast = function()
         elseif (action.Name == 'Chocobo Mazurka') or (string.match(action.Name, 'Paeon')) then
             gFunc.Equip('Range', 'Ebony Harp +1');
         else
-            gFunc.Equip('Range', 'Ryl.Spr. Horn');
-            -- gFunc.Equip('Range', 'Ebony Harp +1');
+            -- gFunc.Equip('Range', 'Ryl.Spr. Horn');
+            gFunc.Equip('Range', 'Ebony Harp +1');
         end
     end
 end
