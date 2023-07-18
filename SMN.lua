@@ -2,13 +2,13 @@ local profile = {};
 local sets = {
     ['Idle_Priority'] = {
         Main = {'Earth Staff', 'Kukulcan\'s Staff', 'Lgn. Staff' },
-        -- Head = {'', 'Silver Hairpin'},
+        -- Head = {' ', 'Silver Hairpin'},
         Neck = {'Smn. Torque', 'Justice Badge'},
         Ear1 = {'Energy Earring'},
         Ear2 = {'Energy Earring'},
         Body = {'Vermillion Cloak', 'Seer\'s Tunic', 'Doublet'},
         Hands = {'Savage Gauntlets', 'Zealot\'s Mitts'},
-        Ring1 = {'Astral Ring'},
+        Ring1 = {'Tamas Ring', 'Astral Ring'},
         Ring2 = {'Astral Ring'},
         Back = {'White Cape'},
         Waist = {'Friar\'s Rope'},
@@ -35,8 +35,7 @@ profile.OnLoad = function()
 
     gSettings.AllowAddSet = true;
 
-    AshitaCore:GetChatManager():QueueCommand(1, '/macro book 3');
-    AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
+    AshitaCore:GetChatManager():RunScript(true, 'smn_change_to.txt');
 end
 
 profile.OnUnload = function()
@@ -90,50 +89,53 @@ profile.HandleDefault = function()
     if (pet ~= nil) then
         -- gFunc.Message(pet.Name)
         gFunc.Equip('Legs', 'Evoker\'s Spats');
+        gFunc.Equip('Ear1', 'Beastly Earring');
 
         if (pet.Name == 'Carbuncle') then
-            if (env.Day == 'Lightsday') then
-                -- gFunc.Equip('Body', )
-            end
             gFunc.Equip('Main', 'Light Staff');
             gFunc.Equip('Body', 'Vermillion Cloak');
             gFunc.Equip('Hands', 'Carbuncle Mitts');
+            if (env.Day == 'Lightsday') then
+                gFunc.Equip('Head', 'Evoker\'s Horn');
+                gFunc.Equip('Body', 'Summoner\'s Dblt.');
+            end
         else
             gFunc.Equip('Head', 'Evoker\'s Horn');
             gFunc.Equip('Body', 'Austere Robe');
+            
             if (pet.Name == 'Garuda') then
                 if (env.Day == 'Windsday') then
-                    -- gFunc.Equip('Body', )
+                    gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
                 gFunc.Equip('Main', 'Wind Staff');
             elseif (pet.Name == 'Titan') then
                 if (env.Day == 'Earthsday') then
-                    -- gFunc.Equip('Body', )
+                    gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
                 gFunc.Equip('Main', 'Earth Staff');
             elseif (pet.Name == 'Ifrit') then
                 if (env.Day == 'Firesday') then
-                    -- gFunc.Equip('Body', )
+                    gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
                 gFunc.Equip('Main', 'Fire Staff');
             elseif (pet.Name == 'Fenrir') or (pet.Name == 'Diabolos') then
                 if (env.Day == 'Darksday') then
-                    -- gFunc.Equip('Body', )
+                    gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
                 gFunc.Equip('Main', 'Dark Staff');
             elseif (pet.Name == 'Shiva') then
                 if (env.Day == 'Iceday') then
-                    -- gFunc.Equip('Body', )
+                    gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
                 gFunc.Equip('Main', 'Ice Staff');
             elseif (pet.Name == 'Leviathan') then
                 if (env.Day == 'Watersday') then
-                    -- gFunc.Equip('Body', )
+                    gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
                 gFunc.Equip('Main', 'Water Staff');
             elseif (pet.Name == 'Ramuh') then
                 if (env.Day == 'Lightningday') then
-                    -- gFunc.Equip('Body', )
+                    gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
                 gFunc.Equip('Main', 'Ice Staff');
             elseif (pet.Name == 'LightSpirit') then
