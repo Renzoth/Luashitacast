@@ -4,16 +4,20 @@ local sets = {
         Main = {'Earth Staff', 'Kukulcan\'s Staff', 'Lgn. Staff' },
         -- Head = {' ', 'Silver Hairpin'},
         Neck = {'Smn. Torque', 'Justice Badge'},
-        Ear1 = {'Energy Earring'},
+        Ear1 = {'Magnetic Earring', 'Energy Earring'},
         Ear2 = {'Energy Earring'},
         Body = {'Vermillion Cloak', 'Seer\'s Tunic', 'Doublet'},
         Hands = {'Savage Gauntlets', 'Zealot\'s Mitts'},
         Ring1 = {'Tamas Ring', 'Astral Ring'},
-        Ring2 = {'Astral Ring'},
-        Back = {'White Cape'},
-        Waist = {'Friar\'s Rope'},
+        Ring2 = {'Evoker\'s Ring', 'Astral Ring'},
+        Back = {'Summoner\'s Cape', 'White Cape'},
+        Waist = {'Hierarch Belt', 'Friar\'s Rope'},
         Legs = {'Savage Loincloth', 'Baron\'s Slops'},
         Feet = {'Evoker\'s Pigaches', 'San d\'Orian Clogs'},
+    },
+    ['MND'] = {
+        Body = 'Errant Hpl.',
+        Neck = 'Justice Badge',
     },
     ['Fishing'] = {
         Range = 'Halcyon Rod',
@@ -70,6 +74,7 @@ profile.HandleDefault = function()
 
     if (player.Status == 'Resting') then
         gFunc.Equip('Main', 'Dark Staff');
+        gFunc.Equip('Neck', 'Checkered Scarf');
         if (player.MainJobSync < 59) then
             gFunc.Equip('Body', 'Seer\'s Tunic');
         end
@@ -89,7 +94,7 @@ profile.HandleDefault = function()
     if (pet ~= nil) then
         -- gFunc.Message(pet.Name)
         gFunc.Equip('Legs', 'Evoker\'s Spats');
-        gFunc.Equip('Ear1', 'Beastly Earring');
+        gFunc.Equip('Ear2', 'Beastly Earring');
 
         if (pet.Name == 'Carbuncle') then
             gFunc.Equip('Main', 'Light Staff');
@@ -165,6 +170,7 @@ profile.HandleMidcast = function()
     local action = gData.GetAction();
     if (string.match(action.Name, 'Cure')) then
         gFunc.Equip('Main', 'Light Staff');
+        gFunc.EquipSet('MND');
     end
 
     if (action.Type == 'Summoning') then
