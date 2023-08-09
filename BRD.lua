@@ -4,7 +4,7 @@ local sets = {
         Main = 'Earth Staff',
         Range = 'Horn +1',
         Neck = 'Wind Torque',
-        Ear1 = 'Melody Earring +1',
+        Ear1 = 'Magnetic Earring',
         Ear2 = 'Melody Earring +1',
         Hands = 'Choral Cuffs',
         Ring1 = 'Tamas Ring',
@@ -99,8 +99,8 @@ profile.HandleMidcast = function()
         elseif (action.Name == 'Chocobo Mazurka') or (string.match(action.Name, 'Paeon')) then
             gFunc.Equip('Range', 'Ebony Harp +1');
         else
-            -- gFunc.Equip('Range', 'Ryl.Spr. Horn');
-            gFunc.Equip('Range', 'Ebony Harp +1');
+            gFunc.Equip('Range', 'Ryl.Spr. Horn');
+            -- gFunc.Equip('Range', 'Ebony Harp +1');
         end
     end
 end
