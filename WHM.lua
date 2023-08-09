@@ -1,7 +1,7 @@
 local profile = {};
 local sets = {
     ['Idle_Priority'] = {
-        Main = {'Earth Staff'},
+        Main = {'Earth Staff', 'Solid Wand'},
         -- Sub = {'Maple Shield'},
         Head = {'Bastokan Circlet'},
         Neck = {'Justice Badge'},
