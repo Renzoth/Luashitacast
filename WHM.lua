@@ -45,17 +45,26 @@ profile.HandleDefault = function()
         Settings.CurrentLevel = myLevel;
     end
 
+    if (pet ~= nil) then
+        gFunc.Equip('Waist', 'Avatar Belt')
+        if (pet.Name == 'Ifrit') then
+            gFunc.Equip('Main', 'Fire Staff');
+        end
+    end
+
     if (player.Status == 'Resting') then
+        gFunc.Equip('Neck', 'Checkered Scarf');
+
         if (player.SubJob == 'BLM') then
             gFunc.Equip('Back', 'Wizard\'s Mantle')
-            if (player.MainJobSync < 51) then
-                gFunc.Equip('Main', 'Blessed Hammer');
-            else
-                gFunc.Equip('Main', 'Dark Staff');
-            end
+        end
+
+        if (player.MainJobSync < 51) then
+            gFunc.Equip('Main', 'Blessed Hammer');
+        else
+            gFunc.Equip('Main', 'Dark Staff');
         end
         
-        gFunc.Equip('Neck', 'Checkered Scarf');
         if (player.MainJobSync < 59) then
             gFunc.Equip('Body', 'Seer\'s Tunic');
         end
