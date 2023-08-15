@@ -94,6 +94,7 @@ profile.HandleMidcast = function()
     if (string.match(action.Name, 'Banish')) or (action.Name == 'Holy') then
         gFunc.Equip('Main', 'Light Staff');
         gFunc.Equip('Ear1', 'Moldavite Earring');
+        gFunc.Equip('Legs', 'Healer\'s Pantaln.');
     end
 end
 
