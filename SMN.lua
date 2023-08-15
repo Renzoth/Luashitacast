@@ -92,57 +92,89 @@ profile.HandleDefault = function()
     end
 
     if (pet ~= nil) then
-        -- gFunc.Message(pet.Name)
         gFunc.Equip('Legs', 'Evoker\'s Spats');
         gFunc.Equip('Ear2', 'Beastly Earring');
 
         if (pet.Name == 'Carbuncle') then
+            -- CARBUNCLE
             gFunc.Equip('Main', 'Light Staff');
             gFunc.Equip('Body', 'Vermillion Cloak');
             gFunc.Equip('Hands', 'Carbuncle Mitts');
-            if (env.Day == 'Lightsday') then
-                gFunc.Equip('Head', 'Evoker\'s Horn');
-                gFunc.Equip('Body', 'Summoner\'s Dblt.');
-            end
+            -- END CARBUNCLE
         else
-            gFunc.Equip('Head', 'Evoker\'s Horn');
+            gFunc.Equip('Head', 'Summoner\'s Horn');
             gFunc.Equip('Body', 'Austere Robe');
             
             if (pet.Name == 'Garuda') then
+                -- GARUDA
                 if (env.Day == 'Windsday') then
                     gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
+                if (env.RawWeatherElement == 'Wind') then
+                    gFunc.Equip('Head', 'Summoner\'s Horn');
+                end
                 gFunc.Equip('Main', 'Wind Staff');
+                -- END GARUDA
             elseif (pet.Name == 'Titan') then
+                -- EARTH
                 if (env.Day == 'Earthsday') then
                     gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
+                if (env.RawWeatherElement == 'Earth') then
+                    gFunc.Equip('Head', 'Summoner\'s Horn');
+                end
                 gFunc.Equip('Main', 'Earth Staff');
+                -- END EARTH
             elseif (pet.Name == 'Ifrit') then
+                -- IFRIT
                 if (env.Day == 'Firesday') then
                     gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
+                if (env.RawWeatherElement == 'Fire') then
+                    gFunc.Equip('Head', 'Summoner\'s Horn');
+                end
                 gFunc.Equip('Main', 'Fire Staff');
+                -- END IFRIT
             elseif (pet.Name == 'Fenrir') or (pet.Name == 'Diabolos') then
+                -- FENRIR DIABOLOS
                 if (env.Day == 'Darksday') then
                     gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
+                if (env.RawWeatherElement == 'Dark') then
+                    gFunc.Equip('Head', 'Summoner\'s Horn');
+                end
                 gFunc.Equip('Main', 'Dark Staff');
+                -- END FENRIR DIABOLOS
             elseif (pet.Name == 'Shiva') then
+                -- SHIVA
                 if (env.Day == 'Iceday') then
                     gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
+                if (env.RawWeatherElement == 'Ice') then
+                    gFunc.Equip('Head', 'Summoner\'s Horn');
+                end
                 gFunc.Equip('Main', 'Ice Staff');
+                -- END SHIVA
             elseif (pet.Name == 'Leviathan') then
+                -- LEVIATHAN
                 if (env.Day == 'Watersday') then
                     gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
+                if (env.RawWeatherElement == 'Water') then
+                    gFunc.Equip('Head', 'Summoner\'s Horn');
+                end
                 gFunc.Equip('Main', 'Water Staff');
+                -- END LEVIATHAN
             elseif (pet.Name == 'Ramuh') then
+                -- RAMUH
                 if (env.Day == 'Lightningday') then
                     gFunc.Equip('Body', 'Summoner\'s Dblt.');
                 end
-                gFunc.Equip('Main', 'Ice Staff');
+                if (env.RawWeatherElement == 'Thunder') then
+                    gFunc.Equip('Head', 'Summoner\'s Horn');
+                end
+                gFunc.Equip('Main', 'Lightning Staff');
+                -- END RAMUH
             elseif (pet.Name == 'LightSpirit') then
                 gFunc.Equip('Main', 'Light Staff');
             end
@@ -152,12 +184,17 @@ profile.HandleDefault = function()
     -- SANDY IS THE BEST FUCK WINDY FUCK MIMI
     -- gFunc.Message(env.Area);
     if (string.match(env.Area, 'San d\'Oria')) then
-        gFunc.Equip('Head', 'Evoker\'s Horn');
+        gFunc.Equip('Head', 'Summoner\'s Horn');
         gFunc.Equip('Body', 'Kingdom Aketon');
     end
 end
 
 profile.HandleAbility = function()
+    local action = gData.GetAction();
+    if (string.match(action.Name, 'Blood Pact')) then
+        gFunc.Equip('Head', 'Summoner\'s Horn')
+        gFunc.Equip('Body', 'Austere Robe');
+    end
 end
 
 profile.HandleItem = function()
