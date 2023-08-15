@@ -11,13 +11,18 @@ local sets = {
         Ring2 = 'Minstrel\'s Ring',
         Back = 'Jester\'s Cape +1',
         Waist = 'Corsette +1',
-        Legs = 'Choral Cannions',
+        Legs = 'Bard\'s Cannions',
         Feet = 'Crow Gaiters',
     },
     ['MP'] = {
         Ring2 = 'Astral Ring',
-        Legs = 'Savage Loincloth',
+        Legs = 'Bard\'s Cannions',
     },
+    ['MND'] = {
+        Body = 'Errant Hpl.',
+        Main = 'Light Staff',
+        Legs = 'Bard\'s Cannions',
+    }
 };
 profile.Sets = sets;
 
@@ -83,7 +88,7 @@ profile.HandleMidcast = function()
             gFunc.Equip('Main', 'Earth Staff');
             gFunc.Equip('Head', 'Noble\'s Ribbon');
             gFunc.Equip('Body', 'Errant Hpl.');
-            gFunc.Equip('Legs', 'Errant Slops');
+            gFunc.Equip('Legs', 'Bard\'s Cannions');
             gFunc.Equip('Feet', 'Savage Gaiters');
         elseif (action.Name == 'Foe Lullaby') or (action.Name == 'Horde Lullaby') or (action.Name == 'Magic Finale') or (string.match(action.Name, 'Requiem')) then
             if (action.Name == 'Horde Lullaby') then    
@@ -94,7 +99,7 @@ profile.HandleMidcast = function()
             gFunc.Equip('Head', 'Noble\'s Ribbon');
             gFunc.Equip('Body', 'Errant Hpl.');
             gFunc.Equip('Main', 'Light Staff');
-            gFunc.Equip('Legs', 'Errant Slops');
+            gFunc.Equip('Legs', 'Bard\'s Cannions');
             gFunc.Equip('Feet', 'Savage Gaiters');
         elseif (action.Name == 'Chocobo Mazurka') or (string.match(action.Name, 'Paeon')) then
             gFunc.Equip('Range', 'Ebony Harp +1');
@@ -102,6 +107,10 @@ profile.HandleMidcast = function()
             gFunc.Equip('Range', 'Ryl.Spr. Horn');
             -- gFunc.Equip('Range', 'Ebony Harp +1');
         end
+    end
+
+    if (string.match(action.Name, 'Cure')) then
+        gFunc.EquipSet('MND');
     end
 end
 
