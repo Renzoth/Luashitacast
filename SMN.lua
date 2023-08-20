@@ -97,7 +97,7 @@ profile.HandleDefault = function()
 
         if (pet.Name == 'Carbuncle') then
             -- CARBUNCLE
-            gFunc.Equip('Main', 'Light Staff');
+            gFunc.Equip('Main', 'Apollo\'s Staff');
             gFunc.Equip('Body', 'Vermillion Cloak');
             gFunc.Equip('Hands', 'Carbuncle Mitts');
             -- END CARBUNCLE
@@ -176,7 +176,7 @@ profile.HandleDefault = function()
                 gFunc.Equip('Main', 'Lightning Staff');
                 -- END RAMUH
             elseif (pet.Name == 'LightSpirit') then
-                gFunc.Equip('Main', 'Light Staff');
+                gFunc.Equip('Main', 'Apollo\'s Staff');
             end
         end
     end
@@ -206,7 +206,7 @@ end
 profile.HandleMidcast = function()
     local action = gData.GetAction();
     if (string.match(action.Name, 'Cure')) then
-        gFunc.Equip('Main', 'Light Staff');
+        gFunc.Equip('Main', 'Apollo\'s Staff');
         gFunc.EquipSet('MND');
     end
 
