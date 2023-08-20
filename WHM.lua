@@ -3,11 +3,11 @@ local sets = {
     ['Idle_Priority'] = {
         Main = {'Earth Staff', 'Solid Wand'},
         -- Sub = {'Maple Shield'},
-        Head = {'Bastokan Circlet'},
+        -- Head = {'Bastokan Circlet'},
         Neck = {'Justice Badge'},
         Ear1 = {'Energy Earring'},
         Ear2 = {'Energy Earring'},
-        Body = {'Seer\'s Tunic'},
+        Body = {'Vermillion Cloak', 'Seer\'s Tunic'},
         Hands = {'Savage Gauntlets'},
         Ring1 = {'Tamas Ring'},
         Ring2 = {'Astral Ring'},
@@ -87,12 +87,12 @@ profile.HandleMidcast = function()
     local action = gData.GetAction();
 
     if (string.match(action.Name, 'Cure')) then
-        gFunc.Equip('Main', 'Light Staff');
+        gFunc.Equip('Main', 'Apollo\'s Staff');
         -- gFunc.EquipSet('MND');
     end
 
     if (string.match(action.Name, 'Banish')) or (action.Name == 'Holy') then
-        gFunc.Equip('Main', 'Light Staff');
+        gFunc.Equip('Main', 'Apollo\'s Staff');
         gFunc.Equip('Ear1', 'Moldavite Earring');
         gFunc.Equip('Legs', 'Healer\'s Pantaln.');
     end
