@@ -20,7 +20,7 @@ local sets = {
     },
     ['MND'] = {
         Body = 'Errant Hpl.',
-        Main = 'Light Staff',
+        Main = 'Apollo\'s Staff',
         Legs = 'Bard\'s Cannions',
     }
 };
@@ -98,7 +98,7 @@ profile.HandleMidcast = function()
             end
             gFunc.Equip('Head', 'Noble\'s Ribbon');
             gFunc.Equip('Body', 'Errant Hpl.');
-            gFunc.Equip('Main', 'Light Staff');
+            gFunc.Equip('Main', 'Apollo\'s Staff');
             gFunc.Equip('Legs', 'Bard\'s Cannions');
             gFunc.Equip('Feet', 'Savage Gaiters');
         elseif (action.Name == 'Chocobo Mazurka') or (string.match(action.Name, 'Paeon')) then
