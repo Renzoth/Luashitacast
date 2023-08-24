@@ -8,7 +8,7 @@ local sets = {
         Ear1 = {'Energy Earring'},
         Ear2 = {'Energy Earring'},
         Body = {'Vermillion Cloak', 'Seer\'s Tunic'},
-        Hands = {'Savage Gauntlets'},
+        Hands = {'Zenith Mitts', 'Savage Gauntlets'},
         Ring1 = {'Tamas Ring'},
         Ring2 = {'Astral Ring'},
         Back = {'White Cape +1'},
@@ -38,18 +38,12 @@ end
 
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
+    local pet = gData.GetPet();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
 
     if (myLevel ~= Settings.CurrentLevel) then
         gFunc.EvaluateLevels(profile.Sets, myLevel);
         Settings.CurrentLevel = myLevel;
-    end
-
-    if (pet ~= nil) then
-        gFunc.Equip('Waist', 'Avatar Belt')
-        if (pet.Name == 'Ifrit') then
-            gFunc.Equip('Main', 'Fire Staff');
-        end
     end
 
     if (player.Status == 'Resting') then
@@ -71,6 +65,14 @@ profile.HandleDefault = function()
         gFunc.Equip('Legs', 'Baron\'s Slops');
     else
         gFunc.EquipSet('Idle');
+    end
+
+    if (pet ~= nil) then
+        -- gFunc.Message(pet.Name)
+        gFunc.Equip('Waist', 'Avatar Belt')
+        if (pet.Name == 'Ifrit') then
+            gFunc.Equip('Main', 'Fire Staff');
+        end
     end
 end
 
@@ -95,6 +97,7 @@ profile.HandleMidcast = function()
         gFunc.Equip('Main', 'Apollo\'s Staff');
         gFunc.Equip('Ear1', 'Moldavite Earring');
         gFunc.Equip('Legs', 'Healer\'s Pantaln.');
+        gFunc.Equip('Hands', 'Zenith Mitts');
     end
 end
 
