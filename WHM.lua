@@ -5,14 +5,14 @@ local sets = {
         -- Sub = {'Maple Shield'},
         -- Head = {'Bastokan Circlet'},
         Neck = {'Justice Badge'},
-        Ear1 = {'Energy Earring'},
-        Ear2 = {'Energy Earring'},
-        Body = {'Vermillion Cloak', 'Seer\'s Tunic'},
+        Ear1 = {'Loquac. Earring', 'Energy Earring'},
+        Ear2 = {'Magnetic Earring', 'Energy Earring'},
+        Body = {'Cleric\'s Bliaut', 'Vermillion Cloak', 'Seer\'s Tunic'},
         Hands = {'Zenith Mitts', 'Savage Gauntlets'},
         Ring1 = {'Tamas Ring'},
         Ring2 = {'Astral Ring'},
         Back = {'White Cape +1'},
-        Waist = {'Friar\'s Rope'},
+        Waist = {'Hierarch Belt', 'Friar\'s Rope'},
         Legs = {'Savage Loincloth'},
         Feet = {'Seer\'s Pumps +1'},
     },
@@ -48,24 +48,28 @@ profile.HandleDefault = function()
 
     if (player.Status == 'Resting') then
         gFunc.Equip('Neck', 'Checkered Scarf');
-
+        gFunc.Equip('Body', 'Errant Hpl.');
         if (player.SubJob == 'BLM') then
             gFunc.Equip('Back', 'Wizard\'s Mantle')
         end
-
         if (player.MainJobSync < 51) then
             gFunc.Equip('Main', 'Blessed Hammer');
         else
             gFunc.Equip('Main', 'Dark Staff');
         end
-        
+
         if (player.MainJobSync < 59) then
             gFunc.Equip('Body', 'Seer\'s Tunic');
         end
         gFunc.Equip('Legs', 'Baron\'s Slops');
     else
+        if (player.MainJobSync >= 74) then
+            gFunc.Equip('Head', 'Zenith Crown');
+        end
         gFunc.EquipSet('Idle');
     end
+
+    
 
     if (pet ~= nil) then
         -- gFunc.Message(pet.Name)
@@ -88,8 +92,11 @@ end
 profile.HandleMidcast = function()
     local action = gData.GetAction();
 
+    gFunc.Equip('Head', 'Errant Hat');
+
     if (string.match(action.Name, 'Cure')) then
         gFunc.Equip('Main', 'Apollo\'s Staff');
+        gFunc.Equip('Hands', 'Healer\'s Mitts');
         -- gFunc.EquipSet('MND');
     end
 
@@ -98,7 +105,14 @@ profile.HandleMidcast = function()
         gFunc.Equip('Ear1', 'Moldavite Earring');
         gFunc.Equip('Legs', 'Healer\'s Pantaln.');
         gFunc.Equip('Hands', 'Zenith Mitts');
+        gFunc.Equip('Neck', 'Divine Torque');
     end
+
+    if (action.Skill == 'Enfeebling Magic') then
+        gFunc.Equip('Neck', 'Enfeebling Torque');
+    end
+
+    gFunc.Equip('Head', 'Raven Beret');
 end
 
 profile.HandlePreshot = function()
