@@ -5,9 +5,9 @@ local sets = {
         -- Head = {' ', 'Silver Hairpin'},
         Neck = {'Smn. Torque', 'Justice Badge'},
         Ear1 = {'Magnetic Earring', 'Energy Earring'},
-        Ear2 = {'Energy Earring'},
+        Ear2 = {'Loquac. Earring', 'Energy Earring'},
         Body = {'Vermillion Cloak', 'Seer\'s Tunic', 'Doublet'},
-        Hands = {'Savage Gauntlets', 'Zealot\'s Mitts'},
+        Hands = {'Zenith Mitts', 'Savage Gauntlets', 'Zealot\'s Mitts'},
         Ring1 = {'Tamas Ring', 'Astral Ring'},
         Ring2 = {'Evoker\'s Ring', 'Astral Ring'},
         Back = {'Summoner\'s Cape', 'White Cape'},
@@ -93,6 +93,7 @@ profile.HandleDefault = function()
 
     if (pet ~= nil) then
         gFunc.Equip('Legs', 'Evoker\'s Spats');
+        gFunc.Equip('Hands', 'Summoner\'s Brcr.');
         gFunc.Equip('Ear2', 'Beastly Earring');
 
         if (pet.Name == 'Carbuncle') then
@@ -190,11 +191,10 @@ profile.HandleDefault = function()
 end
 
 profile.HandleAbility = function()
-    local action = gData.GetAction();
-    if (string.match(action.Name, 'Blood Pact')) then
-        gFunc.Equip('Head', 'Summoner\'s Horn')
-        gFunc.Equip('Body', 'Austere Robe');
-    end
+    gFunc.Equip('Head', 'Summoner\'s Horn'); -- -3
+    gFunc.Equip('Legs', 'Summoner\'s Spats'); -- -2
+    gFunc.Equip('Hands', 'Summoner\'s Brcr.'); -- -2
+    gFunc.Equip('Body', 'Austere Robe'); -- -3
 end
 
 profile.HandleItem = function()
@@ -213,6 +213,7 @@ profile.HandleMidcast = function()
     if (action.Type == 'Summoning') then
         gFunc.Equip('Head', 'Evoker\'s Horn');
         gFunc.Equip('Neck', 'Smn. Torque');
+        gFunc.Equip('Hands', 'Summoner\'s Brcr.');
         gFunc.Equip('Body', 'Evoker\'s Doublet');
     end
 end
