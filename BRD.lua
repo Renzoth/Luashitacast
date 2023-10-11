@@ -5,8 +5,8 @@ local sets = {
         Range = 'Horn +1',
         Neck = 'Wind Torque',
         Ear1 = 'Magnetic Earring',
-        Ear2 = 'Melody Earring +1',
-        Hands = 'Choral Cuffs',
+        Ear2 = 'Loquac. Earring',
+        Hands = 'Zenith Mitts', 'Choral Cuffs',
         Ring1 = 'Tamas Ring',
         Ring2 = 'Minstrel\'s Ring',
         Back = 'Jester\'s Cape +1',
@@ -68,7 +68,7 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
-    
+    gFunc.Equip('Body', 'Sha\'ir Manteel');ok
 end
 
 profile.HandleMidcast = function()
@@ -76,6 +76,7 @@ profile.HandleMidcast = function()
     local player = gData.GetPlayer();
     
     if (action.Type == 'Bard Song') then
+        gFunc.Equip('Hands', 'Choral Cuffs');
         if (action.Name == 'Valor Minuet') or (action.Name == 'Valor Minuet II') or
             (action.Name == 'Valor Minuet III') or (action.Name == 'Valor Minuet IV') then
             gFunc.Equip('Range', 'Cornette +1');
