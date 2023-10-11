@@ -87,7 +87,7 @@ profile.HandleAbility = function()
         elseif (player.MainJobSync < 60) then
             gFunc.Equip('Ammo', 'Pet Food Delta')
         else 
-            gFunc.Equip('Ammo', 'Pet Fd. Epsilon')
+            gFunc.Equip('Ammo', 'Pet Food Zeta')
         end
         gFunc.EquipSet(sets.Reward);
     end
