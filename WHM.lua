@@ -4,7 +4,7 @@ local sets = {
         Main = {'Earth Staff', 'Solid Wand'},
         -- Sub = {'Maple Shield'},
         -- Head = {'Bastokan Circlet'},
-        Neck = {'Justice Badge'},
+        Neck = {'Promise Badge', 'Justice Badge'},
         Ear1 = {'Loquac. Earring', 'Energy Earring'},
         Ear2 = {'Magnetic Earring', 'Energy Earring'},
         Body = {'Cleric\'s Bliaut', 'Vermillion Cloak', 'Seer\'s Tunic'},
@@ -12,9 +12,9 @@ local sets = {
         Ring1 = {'Tamas Ring'},
         Ring2 = {'Astral Ring'},
         Back = {'White Cape +1'},
-        Waist = {'Hierarch Belt', 'Friar\'s Rope'},
-        Legs = {'Savage Loincloth'},
-        Feet = {'Seer\'s Pumps +1'},
+        Waist = {'Penitent\'s Rope', 'Friar\'s Rope'},
+        Legs = {'Zenith Slacks', 'Savage Loincloth'},
+        Feet = {'Rostrum Pumps', 'Errant Pigaches', 'Seer\'s Pumps +1'},
     },
 };
 profile.Sets = sets;
@@ -55,7 +55,7 @@ profile.HandleDefault = function()
         if (player.MainJobSync < 51) then
             gFunc.Equip('Main', 'Blessed Hammer');
         else
-            gFunc.Equip('Main', 'Dark Staff');
+            gFunc.Equip('Main', 'Pluto\'s Staff');
         end
 
         if (player.MainJobSync < 59) then
