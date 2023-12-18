@@ -1,28 +1,36 @@
 local profile = {};
 local sets = {
+    ['HPDOWN'] = {
+        Main = 'Earth Staff',
+        Range = 'Cornette +1',
+        Head = 'Zenith Crown',
+        Neck = 'Star Necklace',
+        Ear1 = 'Magnetic Earring',
+        Ear2 = 'Loquac. Earring',
+        Body = 'Black Cotehardie',
+        Hands = 'Zenith Mitts',
+        Ring1 = 'Minstrel\'s Ring',
+        Ring2 = 'Astral Ring',
+        Back = 'Jester\'s Cape +1',
+        Waist = 'Penitent\'s Rope',
+        Legs = 'Zenith Slacks',
+        Feet = 'Errant Pigaches',
+    },
     ['Idle'] = {
         Main = 'Earth Staff',
-        Range = 'Horn +1',
+        Range = 'Cornette +1',
         Neck = 'Wind Torque',
         Ear1 = 'Magnetic Earring',
         Ear2 = 'Loquac. Earring',
-        Hands = 'Zenith Mitts', 'Choral Cuffs',
-        Ring1 = 'Tamas Ring',
-        Ring2 = 'Minstrel\'s Ring',
+        Body = 'Vermillion Cloak',
+        Hands = 'Choral Cuffs',
+        Ring2 = 'Tamas Ring',
+        Ring1 = 'Minstrel\'s Ring',
         Back = 'Jester\'s Cape +1',
         Waist = 'Corsette +1',
         Legs = 'Bard\'s Cannions',
-        Feet = 'Crow Gaiters',
+        Feet = 'Rostrum Pumps'
     },
-    ['MP'] = {
-        Ring2 = 'Astral Ring',
-        Legs = 'Bard\'s Cannions',
-    },
-    ['MND'] = {
-        Body = 'Errant Hpl.',
-        Main = 'Apollo\'s Staff',
-        Legs = 'Bard\'s Cannions',
-    }
 };
 profile.Sets = sets;
 
@@ -50,7 +58,7 @@ profile.HandleDefault = function()
         gFunc.Equip('Body', 'Crow Jupon');
         gFunc.Equip('Head', 'Emperor Hairpin');
     else
-        gFunc.Equip('Body', 'Vermillion Cloak');
+        -- gFunc.Equip('Body', 'Vermillion Cloak');
     end
 
     if (player.Status == 'Resting') then
@@ -68,13 +76,16 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
-    gFunc.Equip('Body', 'Sha\'ir Manteel');ok
+    gFunc.EquipSet('HPDOWN');
 end
 
 profile.HandleMidcast = function()
     local action = gData.GetAction();
     local player = gData.GetPlayer();
     
+    gFunc.EquipSet('Idle');
+    gFunc.Equip('Ring2', 'Bomb Queen Ring')
+
     if (action.Type == 'Bard Song') then
         gFunc.Equip('Hands', 'Choral Cuffs');
         if (action.Name == 'Valor Minuet') or (action.Name == 'Valor Minuet II') or
