@@ -12,7 +12,7 @@ local sets = {
         Ring2 = {'Evoker\'s Ring', 'Astral Ring'},
         Back = {'Summoner\'s Cape', 'White Cape'},
         Waist = {'Hierarch Belt', 'Friar\'s Rope'},
-        Legs = {'Savage Loincloth', 'Baron\'s Slops'},
+        Legs = {'Zenith Slacks', 'Savage Loincloth', 'Baron\'s Slops'},
         Feet = {'Evoker\'s Pigaches', 'San d\'Orian Clogs'},
     },
     ['MND'] = {
@@ -38,8 +38,6 @@ profile.OnLoad = function()
 
 
     gSettings.AllowAddSet = true;
-
-    AshitaCore:GetChatManager():RunScript(true, 'smn_change_to.txt');
 end
 
 profile.OnUnload = function()
@@ -73,7 +71,7 @@ profile.HandleDefault = function()
     -- gFunc.Message(env.Area)
 
     if (player.Status == 'Resting') then
-        gFunc.Equip('Main', 'Dark Staff');
+        gFunc.Equip('Main', 'Pluto\'s Staff');
         gFunc.Equip('Neck', 'Checkered Scarf');
         if (player.MainJobSync < 59) then
             gFunc.Equip('Body', 'Seer\'s Tunic');
@@ -144,7 +142,7 @@ profile.HandleDefault = function()
                 if (env.RawWeatherElement == 'Dark') then
                     gFunc.Equip('Head', 'Summoner\'s Horn');
                 end
-                gFunc.Equip('Main', 'Dark Staff');
+                gFunc.Equip('Main', 'Pluto\'s Staff');
                 -- END FENRIR DIABOLOS
             elseif (pet.Name == 'Shiva') then
                 -- SHIVA
@@ -154,7 +152,7 @@ profile.HandleDefault = function()
                 if (env.RawWeatherElement == 'Ice') then
                     gFunc.Equip('Head', 'Summoner\'s Horn');
                 end
-                gFunc.Equip('Main', 'Ice Staff');
+                gFunc.Equip('Main', 'Aquilo\'s Staff');
                 -- END SHIVA
             elseif (pet.Name == 'Leviathan') then
                 -- LEVIATHAN
