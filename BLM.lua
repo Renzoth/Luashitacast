@@ -4,18 +4,57 @@ local sets = {
         Main = {'Earth Staff', 'Solid Wand', 'Yew Wand +1'},   
         -- Sub = {'Maple Shield'},
         Ammo = {'Morion Tathlum'},
-        Head = {'Seer\'s Crown +1'},
-        Neck = {'Black Neckerchief'},
+        -- Head = {'Wizard\'s Petasos', 'Seer\'s Crown +1'},
+        Neck = {'Philomath Stole', 'Black Neckerchief'},
         Ear1 = {'Loquac. Earring', 'Moldavite Earring'},
         Ear2 = {'Magnetic Earring', 'Morion Earring'},
-        Body = {'Seer\'s Tunic'},
-        Hands = {'Zenith Mitts', 'Seer\'s Mitts +1'},
+        Body = {'Vermillion Cloak', 'Wizard\'s Coat', 'Seer\'s Tunic'},
+        Hands = {'Zenith Mitts', 'Wizard\'s Gloves', 'Seer\'s Mitts +1'},
         Ring1 = {'Tamas Ring', 'Astral Ring'},
-        Ring2 = {'Wisdom Ring'},
+        Ring2 = {'Genius Ring'},
         Back = {'Black Cape +1'},
-        Waist = {'Penitent\'s Rope', 'Mrc.Cpt.Belt'},
+        Waist = {'Penitent\'s Rope', 'Mrc.Cpt. Belt'},
         Legs = {'Zenith Slacks', 'Seer\'s Slacks'},
-        Feet = {'Seer\'s Pumps +1'},
+        Feet = {'Wizard\'s Sabots', 'Seer\'s Pumps +1'},
+    },
+    ['MND'] = {
+        Body = 'Errant Hpl.',
+        Back = 'White Cape +1',
+        Neck = 'Promise Badge',
+        Ring1 = 'Tamas Ring',
+        Legs = 'Errant Slops',
+        Waist = 'Penitent\'s Rope',
+        Feet = 'Errant Pigaches',
+    },
+    ['INT'] = {
+        Head = 'Wizard\'s Petasos',
+        Body = 'Black Cotehardie',
+        -- Body = 'Errant Hpl.',
+        Back = 'Black Cape +1',
+        Neck = 'Philomath Stole',
+        Ring1 = 'Tamas Ring',
+        Ring2 = 'Snow Ring',
+        Ammo = 'Phtm. Tathlum',
+        Waist = 'Penitent\'s Rope',
+    },
+    ['EnfeeblingSkill'] = {
+        Body = 'Wizard\'s Coat',
+        Neck = 'Enfeebling Torque',
+        Ring1 = 'Tamas Ring',
+    },
+    ['HealingSkill'] = {
+        Neck = 'Healing Torque',
+    },
+    ['ElementalSkill'] = { -- and MAB
+        Neck = 'Elemental Torque',
+        Hands = 'Wizard\'s Gloves',
+        Ear1 = 'Moldavite Earring',
+        Hands = 'Zenith Mitts',
+    },
+    ['EnhancingSkill'] = {
+    },
+    ['DarkSkill'] = {
+        Legs= 'Wizard\'s Tonban',
     },
 };
 profile.Sets = sets;
@@ -28,19 +67,7 @@ local Settings = {
 }
 
 profile.OnLoad = function()
-    local player = gData.GetPlayer();
-
     gSettings.AllowAddSet = true;
-
-    -- if (player.SubJob == 'WHM' or player.SubJob == 'BLM') then
-    --     AshitaCore:GetChatManager():QueueCommand(1, '/macro book 2');
-    --     AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-    --     AshitaCore:GetChatManager():QueueCommand(1, '/lockstyleset 7');
-    -- elseif (player.SubJob == 'NIN') then
-    --     AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
-    --     AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-    --     AshitaCore:GetChatManager():QueueCommand(1, '/lockstyle on');
-    -- end
 end
 
 profile.OnUnload = function()
@@ -61,9 +88,10 @@ profile.HandleDefault = function()
     if (player.Status == 'Resting') then
         gFunc.Equip('Neck', 'Checkered Scarf');
         gFunc.Equip('Body', 'Errant Hpl.');
-        gFunc.Equip('Waist', 'Hierarch Belt');
-        gFunc.Equip('Legs', 'Baron\'s Slops');
         gFunc.Equip('Main', 'Pluto\'s Staff');
+        gFunc.Equip('Legs', 'Baron\'s Slops');
+    elseif (player.Status == 'Engaged') then
+
     else
         gFunc.EquipSet('Idle');
     end
@@ -78,6 +106,8 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
+    gFunc.Equip('Head', 'Warlock\'s Chapeau');
+    gFunc.Equip('Body', 'Duelist\'s Tabard');
 end
 
 profile.HandleMidcast = function()
@@ -108,37 +138,50 @@ profile.HandleMidcast = function()
     end
 
     if (action.Skill == 'Enhancing Magic') then
+        if (action.Name == 'Stoneskin') then
+            gFunc.EquipSet(sets.MND);
+        else
+            gFunc.EquipSet(sets.EnhancingSkill);
+        end
     end
 
     if (action.Skill == 'Healing Magic') then
+        gFunc.EquipSet(gFunc.Combine(sets.MND, sets.HealingSkill));
     end
 
     if (action.Skill == 'Enfeebling Magic') then
-        if (action.Type == 'White Magic') then
-            gFunc.Equip('Back', 'White Cape +1');
-        elseif (action.Type == 'Black Magic') then
-            gFunc.Equip('Back', 'Black Cape +1');
-            gFunc.Equip('Waist', 'Mrc.Cpt. Belt');
-            gFunc.Equip('Ammo', 'Phtm. Tathlum');
+        if (player.SubJob ~= 'NIN' and player.MainJobSync < 51) then
+            gFunc.Equip('Main', 'Fencing Degen');
         end
-        gFunc.Equip('Neck', 'Enfeebling Torque');
-        gFunc.Equip('Ring1', 'Tamas Ring');
+        if (action.Type == 'White Magic') then
+            gFunc.EquipSet(gFunc.Combine(sets.MND, sets.EnfeeblingSkill));
+        elseif (action.Type == 'Black Magic') then
+            gFunc.EquipSet(gFunc.Combine(sets.INT, sets.EnfeeblingSkill));
+        end
     end
 
-    if (action.Skill == 'Elemental Magic' or action.Skill == 'Dark Magic') then
-        gFunc.Equip('Ear1', 'Moldavite Earring');
-        gFunc.Equip('Ring1', 'Tamas Ring');
-        gFunc.Equip('Back', 'Black Cape +1');
-        gFunc.Equip('Hands', 'Duelist\'s Gloves');
-        gFunc.Equip('Waist', 'Mrc.Cpt. Belt');
-        gFunc.Equip('Ammo', 'Phtm. Tathlum');
+    if (action.Skill == 'Elemental Magic') then
+        gFunc.ForceEquipSet(gFunc.Combine(sets.INT, sets.ElementalSkill));
         if (player.MPP <= 50) then
             gFunc.Equip('Neck', 'Uggalepih Pendant');
-        else
-            gFunc.Equip('Neck', 'Philomath Stole');
         end
+        
+    elseif (action.Skill == 'Dark Magic') then
+        gFunc.EquipSet(gFunc.Combine(sets.INT, sets.DarkSkill));
     end
-    gFunc.Equip('Legs', 'Errant Slops');
+
+    if (action.Skill ~= 'Enfeebling Magic') then
+        gFunc.Equip('Head', 'Raven Beret');
+    end
+
+    if (action.Name == 'Sneak') then
+        gFunc.Message('CASTING SNEAK');
+        gFunc.Equip('Feet', 'Dream Boots +1');
+    elseif (action.Name == 'Invisible') then
+        gFunc.Equip('Hands', 'Dream Mittens +1');
+    end
+
+    
 end
 
 profile.HandlePreshot = function()
