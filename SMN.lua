@@ -1,7 +1,7 @@
 local profile = {};
 local sets = {
     ['Idle_Priority'] = {
-        Main = {'Earth Staff', 'Kukulcan\'s Staff', 'Lgn. Staff' },
+        Main = {'Terra\'s Staff', 'Kukulcan\'s Staff', 'Lgn. Staff' },
         -- Head = {' ', 'Silver Hairpin'},
         Neck = {'Smn. Torque', 'Justice Badge'},
         Ear1 = {'Magnetic Earring', 'Energy Earring'},
@@ -103,6 +103,7 @@ profile.HandleDefault = function()
         else
             gFunc.Equip('Head', 'Summoner\'s Horn');
             gFunc.Equip('Body', 'Austere Robe');
+            gFunc.Equip('Hands', 'Nashir Gages');
             
             if (pet.Name == 'Garuda') then
                 -- GARUDA
@@ -122,7 +123,7 @@ profile.HandleDefault = function()
                 if (env.RawWeatherElement == 'Earth') then
                     gFunc.Equip('Head', 'Summoner\'s Horn');
                 end
-                gFunc.Equip('Main', 'Earth Staff');
+                gFunc.Equip('Main', 'Terra\'s Staff');
                 -- END EARTH
             elseif (pet.Name == 'Ifrit') then
                 -- IFRIT
@@ -199,6 +200,7 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
+    gFunc.Equip('Feet', 'Evoker\'s Boots');
 end
 
 profile.HandleMidcast = function()
