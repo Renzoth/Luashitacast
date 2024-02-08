@@ -1,7 +1,7 @@
 local profile = {};
 local sets = {
     ['HPDOWN'] = {
-        Main = 'Earth Staff',
+        Main = 'Terra\'s Staff',
         Range = 'Cornette +1',
         Head = 'Zenith Crown',
         Neck = 'Star Necklace',
@@ -9,7 +9,7 @@ local sets = {
         Ear2 = 'Loquac. Earring',
         Body = 'Black Cotehardie',
         Hands = 'Zenith Mitts',
-        Ring1 = 'Minstrel\'s Ring',
+        Ring1 = 'Astral Ring',
         Ring2 = 'Astral Ring',
         Back = 'Jester\'s Cape +1',
         Waist = 'Penitent\'s Rope',
@@ -24,12 +24,38 @@ local sets = {
         Ear2 = 'Loquac. Earring',
         Body = 'Vermillion Cloak',
         Hands = 'Choral Cuffs',
-        Ring2 = 'Tamas Ring',
-        Ring1 = 'Minstrel\'s Ring',
+        Ring2 = 'Bomb Queen Ring',
+        Ring1 = 'Tamas Ring',
         Back = 'Jester\'s Cape +1',
         Waist = 'Corsette +1',
         Legs = 'Bard\'s Cannions',
         Feet = 'Rostrum Pumps'
+    },
+    ['Song_Precast'] = {
+        Body = 'Savage Separates',
+        Neck = 'Bloodbead Amulet',
+        Ring1 = 'Minstrel\'s Ring',
+        Ring2 = 'Bomb Queen Ring',
+        Legs = 'Bard\'s Cannions',
+        Feet = 'Savage Gaiters',
+    },
+    ['Debuff'] = {
+        Head = 'Errant Hat',
+        Body = 'Errant Hpl.',
+        Hands = 'Choral Cuffs',
+        Ring1 = 'Tamas Ring',
+        Legs = 'Bard\'s Cannions',
+        Feet = 'Savage Gaiters',
+    },
+    ['MND'] = {
+        Main = 'Apollo\'s Staff',
+        Body = 'Errant Hpl.',
+        Back = 'Prism Cape',
+        Neck = 'Promise Badge',
+        Ring1 = 'Tamas Ring',
+        Legs = 'Errant Slops',
+        Waist = 'Penitent\'s Rope',
+        Feet = 'Errant Pigaches',
     },
 };
 profile.Sets = sets;
@@ -55,7 +81,7 @@ profile.HandleDefault = function()
     local player = gData.GetPlayer();
 
     if (player.SubJob == 'NIN') then
-        gFunc.Equip('Body', 'Crow Jupon');
+        gFunc.Equip('Body', 'Scorpion Harness');
         gFunc.Equip('Head', 'Emperor Hairpin');
     else
         -- gFunc.Equip('Body', 'Vermillion Cloak');
@@ -76,15 +102,30 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
-    gFunc.EquipSet('HPDOWN');
+    local spell = gData.GetAction();
+
+    gFunc.Equip('Legs', 'Byakko\'s Haidate');
+    gFunc.Equip('Waist', 'Swift Belt');
+    gFunc.Equip('Ear2', 'Loquac. Earring');
+    gFunc.Equip('Feet', 'Rostrum Pumps');
+
+    -- WHM 1087 / 75% = 815
+
+    if (spell.Skill == 'Singing') then
+        local player = gData.GetPlayer();
+        if (player.HPP > 75) then
+            gFunc.ForceEquipSet('HPDOWN');
+        end
+
+        gFunc.EquipSet('Song_Precast');
+    end
+    
+    
 end
 
 profile.HandleMidcast = function()
     local action = gData.GetAction();
     local player = gData.GetPlayer();
-    
-    gFunc.EquipSet('Idle');
-    gFunc.Equip('Ring2', 'Bomb Queen Ring')
 
     if (action.Type == 'Bard Song') then
         gFunc.Equip('Hands', 'Choral Cuffs');
@@ -97,22 +138,16 @@ profile.HandleMidcast = function()
             gFunc.Equip('Range', 'Traversiere +1');
         elseif (action.Name == 'Battlefield Elegy') or (action.Name == 'Carnage Elegy') then
             gFunc.Equip('Range', 'Horn +1');
-            gFunc.Equip('Main', 'Earth Staff');
-            gFunc.Equip('Head', 'Noble\'s Ribbon');
-            gFunc.Equip('Body', 'Errant Hpl.');
-            gFunc.Equip('Legs', 'Bard\'s Cannions');
-            gFunc.Equip('Feet', 'Savage Gaiters');
-        elseif (action.Name == 'Foe Lullaby') or (action.Name == 'Horde Lullaby') or (action.Name == 'Magic Finale') or (string.match(action.Name, 'Requiem')) then
+            gFunc.Equip('Main', 'Terra\'s Staff');
+            gFunc.EquipSet('Debuff');
+        elseif (string.match(action.Name, 'Lullaby')) or (action.Name == 'Magic Finale') or (string.match(action.Name, 'Requiem')) then
             if (action.Name == 'Horde Lullaby') then    
                 gFunc.Equip('Range', 'Ebony Harp +1');
             else    
                 gFunc.Equip('Range', 'Ryl.Spr. Horn');
             end
-            gFunc.Equip('Head', 'Noble\'s Ribbon');
-            gFunc.Equip('Body', 'Errant Hpl.');
             gFunc.Equip('Main', 'Apollo\'s Staff');
-            gFunc.Equip('Legs', 'Bard\'s Cannions');
-            gFunc.Equip('Feet', 'Savage Gaiters');
+            gFunc.EquipSet('Debuff');
         elseif (action.Name == 'Chocobo Mazurka') or (string.match(action.Name, 'Paeon')) then
             gFunc.Equip('Range', 'Ebony Harp +1');
         else
