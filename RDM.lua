@@ -1,7 +1,7 @@
 local profile = {};
 local sets = {
     ['Idle_Priority'] = {
-        Main = {'Earth Staff', 'Solid Wand', 'Yew Wand +1'},   
+        Main = {'Terra\'s Staff', 'Solid Wand', 'Yew Wand +1'},   
         -- Sub = {'Maple Shield'},
         Ammo = {'Hedgehog Bomb'},
         Head = {'Duelist\'s Chapeau', 'Bastokan Circlet'},
@@ -9,20 +9,20 @@ local sets = {
         Ear1 = {'Loquac. Earring', 'Energy Earring'},
         Ear2 = {'Magnetic Earring', 'Energy Earring'},
         Body = {'Duelist\'s Tabard', 'Vermillion Cloak'},
-        Hands = {'Zenith Mitts', 'Duelist\'s Gloves', 'Savage Gauntlets'},
+        Hands = {'Nashira Gages', 'Duelist\'s Gloves', 'Savage Gauntlets'},
         Ring1 = {'Tamas Ring', 'Astral Ring'},
-        Ring2 = {'Astral Ring'},
-        Back = {'White Cape +1'},
+        Ring2 = {'Snow Ring', 'Astral Ring'},
+        Back = {'Errant Cape', 'White Cape +1'},
         Waist = {'Penitent\'s Rope', 'Ryl.Kgt. Belt', 'Friar\'s Rope'},
         Legs = {'Zenith Slacks', 'Savage Loincloth'},
         Feet = {'Warlock\'s Boots', 'Bounding Boots'},
     },
     ['IdleNin_Priority'] = {
-        Main = {'Sapara of Trials'},   
-        Sub = {'Joyeuse'},
+        Main = {'Joyeuse'},   
+        Sub = {'Ryl.Grd. Fleuret'},
         Head = {'Duelist\'s Chapeau', 'Emperor Hairpin'},
         Neck = {'Peacock Amulet'},
-        Ear1 = {'Loquac. Earring', 'Spike Earring', 'Energy Earring'},
+        Ear1 = {'Brutal Earring', 'Spike Earring', 'Energy Earring'},
         Ear2 = {'Magnetic Earring', 'Spike Earring', 'Energy Earring'},
         Body = {'Scorpion Harness', 'Savage Separates'},
         Hands = {'Battle Gloves'},
@@ -32,6 +32,50 @@ local sets = {
         Waist = {'Swift Belt', 'Friar\'s Rope'},
         Legs = {'Warlock\'s Tights', 'Savage Loincloth'},
         Feet = {'Bounding Boots'},
+    },
+    ['MND'] = {
+        Body = 'Errant Hpl.',
+        Back = 'Prism Cape',
+        Neck = 'Promise Badge',
+        Ring1 = 'Tamas Ring',
+        Legs = 'Errant Slops',
+        Waist = 'Penitent\'s Rope',
+        Feet = 'Errant Pigaches',
+    },
+    ['INT'] = {
+        Body = 'Errant Hpl.',
+        Back = 'Prism Cape',
+        Neck = 'Philomath Stole',
+        Hands = 'Duelist\'s Gloves',
+        Ring1 = 'Tamas Ring',
+        Ring2 = 'Snow Ring',
+        Ammo = 'Phtm. Tathlum',
+        Legs = 'Errant Slops',
+        Waist = 'Penitent\'s Rope',
+        Feet = 'Warlock\'s Boots',
+    },
+    ['EnfeeblingSkill'] = {
+        Body = 'Warlock\'s Tabard',
+        Neck = 'Enfeebling Torque',
+        Head = 'Duelist\'s Chapeau',
+        Ring1 = 'Tamas Ring',
+    },
+    ['HealingSkill'] = {
+        Neck = 'Healing Torque',
+        Legs = 'Warlock\'s Tights',
+    },
+    ['EnmityDown'] = {
+        Head = 'Raven Beret',
+        Back = 'Errant Cape',
+    },
+    ['ElementalSkill'] = { -- and MAB
+        Legs = 'Duelist\'s Tights',
+        Ear1 = 'Moldavite Earring',
+        Hands = 'Zenith Mitts',
+    },
+    ['EnhancingSkill'] = {
+        Legs = 'Warlock\'s Tights',
+        Hands = 'Duelist\'s Gloves',
     },
 };
 profile.Sets = sets;
@@ -55,7 +99,6 @@ profile.OnLoad = function()
     elseif (player.SubJob == 'NIN') then
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 20');
         AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-        AshitaCore:GetChatManager():QueueCommand(1, '/lockstyle on');
     end
 end
 
@@ -77,7 +120,7 @@ profile.HandleDefault = function()
     if (player.Status == 'Resting') then
         gFunc.Equip('Neck', 'Checkered Scarf');
         gFunc.Equip('Body', 'Errant Hpl.');
-        gFunc.Equip('Waist', 'Hierarch Belt');
+        gFunc.Equip('Waist', 'Duelist\'s Belt');
         if (player.SubJob == 'BLM') then
             gFunc.Equip('Back', 'Wizard\'s Mantle')
         end
@@ -93,7 +136,7 @@ profile.HandleDefault = function()
             gFunc.Equip('Hands', 'Dusk Gloves');
         end
     else
-        if (player.SubJob == 'WHM' or player.SubJob == 'BLM') then
+        if (player.SubJob == 'WHM' or player.SubJob == 'BLM' or player.SubJob == 'DRK') then
             gFunc.EquipSet('Idle');
         elseif (player.SubJob == 'NIN') then
             gFunc.EquipSet('IdleNin');
@@ -112,6 +155,7 @@ end
 profile.HandlePrecast = function()
     gFunc.Equip('Head', 'Warlock\'s Chapeau');
     gFunc.Equip('Body', 'Duelist\'s Tabard');
+    gFunc.Equip('Ear1', 'Loquac. Earring');
 end
 
 profile.HandleMidcast = function()
@@ -129,7 +173,7 @@ profile.HandleMidcast = function()
             if (action.Name == 'Stoneskin') then
                 gFunc.Equip('Main', 'Water Staff');
             else
-                gFunc.Equip('Main', 'Earth Staff');
+                gFunc.Equip('Main', 'Terra\'s Staff');
             end
             
         elseif (action.Element == "Thunder") then
@@ -144,54 +188,43 @@ profile.HandleMidcast = function()
     end
 
     if (action.Skill == 'Enhancing Magic') then
-        gFunc.Equip('Legs', 'Warlock\'s Tights');
-        gFunc.Equip('Hands', 'Duelist\'s Gloves');
-    end
-
-    if (action.Skill == 'Healing Magic') then
-        gFunc.Equip('Neck', 'Healing Torque');
-        gFunc.Equip('Legs', 'Warlock\'s Tights');
-    end
-
-    if (action.Skill == 'Enfeebling Magic') then
+        if (action.Name == 'Stoneskin') then
+            gFunc.EquipSet(sets.MND);
+        else
+            gFunc.EquipSet(sets.EnhancingSkill);
+        end
+    elseif (action.Skill == 'Healing Magic') then
+        gFunc.EquipSet(gFunc.Combine(sets.MND, sets.HealingSkill));
+    elseif (action.Skill == 'Enfeebling Magic') then
         if (player.SubJob ~= 'NIN' and player.MainJobSync < 51) then
             gFunc.Equip('Main', 'Fencing Degen');
         end
         if (action.Type == 'White Magic') then
-            gFunc.Equip('Back', 'White Cape +1');
-            gFunc.Equip('Legs', 'Warlock\'s Tights');
+            gFunc.EquipSet(gFunc.Combine(sets.MND, sets.EnfeeblingSkill));
         elseif (action.Type == 'Black Magic') then
-            gFunc.Equip('Back', 'Black Cape +1');
-            gFunc.Equip('Hands', 'Duelist\'s Gloves');
-            gFunc.Equip('Waist', 'Mrc.Cpt. Belt');
-            gFunc.Equip('Ammo', 'Phtm. Tathlum');
+            gFunc.EquipSet(gFunc.Combine(sets.INT, sets.EnfeeblingSkill));
         end
-
-        gFunc.Equip('Body', 'Warlock\'s Tabard');
-        gFunc.Equip('Neck', 'Enfeebling Torque');
-        gFunc.Equip('Head', 'Duelist\'s Chapeau');
-        gFunc.Equip('Ring1', 'Tamas Ring');
-    end
-
-    if (action.Skill == 'Elemental Magic' or action.Skill == 'Dark Magic') then
-        gFunc.Equip('Ear1', 'Moldavite Earring');
-        gFunc.Equip('Ring1', 'Tamas Ring');
-        gFunc.Equip('Back', 'Black Cape +1');
-        gFunc.Equip('Hands', 'Duelist\'s Gloves');
-        gFunc.Equip('Waist', 'Mrc.Cpt. Belt');
-        gFunc.Equip('Ammo', 'Phtm. Tathlum');
+    elseif (action.Skill == 'Elemental Magic') then
+        gFunc.EquipSet(gFunc.Combine(sets.INT, sets.ElementalSkill));
         if (player.MPP <= 50) then
             gFunc.Equip('Neck', 'Uggalepih Pendant');
-        else
-            gFunc.Equip('Neck', 'Philomath Stole');
         end
-        
+    elseif (action.Skill == 'Dark Magic') then
+        gFunc.EquipSet(sets.INT);
     end
 
-    gFunc.Equip('Head', 'Raven Beret');
-    gFunc.Equip('Body', 'Warlock\'s Tabard');
-    gFunc.Equip('Legs', 'Errant Slops');
-    gFunc.Equip('Feet', 'Warlock\'s Boots');
+    if (action.Skill ~= 'Enfeebling Magic' and action.Skill ~= 'Elemental Magic') then
+        gFunc.EquipSet(sets.EnmityDown);
+
+    end
+
+    if (action.Name == 'Sneak') then
+        gFunc.Equip('Feet', 'Dream Boots +1');
+    elseif (action.Name == 'Invisible') then
+        gFunc.Equip('Hands', 'Dream Mittens +1');
+    end
+
+    
 end
 
 profile.HandlePreshot = function()
