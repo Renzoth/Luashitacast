@@ -93,6 +93,10 @@ profile.HandleDefault = function()
     else
         gFunc.EquipSet(sets.Idle);
     end
+
+    if (string.match(env.Area, 'San d\'Oria')) then
+        gFunc.Equip('Body', 'Kingdom Aketon');
+    end
 end
 
 profile.HandleAbility = function()
@@ -158,10 +162,6 @@ profile.HandleMidcast = function()
 
     if (string.match(action.Name, 'Cure')) then
         gFunc.EquipSet('MND');
-    end
-
-    if (string.match(env.Area, 'San d\'Oria')) then
-        gFunc.Equip('Body', 'Kingdom Aketon');
     end
 end
 
