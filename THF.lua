@@ -1,8 +1,7 @@
 local profile = {};
 local sets = {
     ['Idle_Priority'] = {
-        Main = {'Dagger of Trials', 'Trailer\'s Kukri', 'Bone Knife +1', 'Marauder\'s Knife', 'Mrc.Cpt. Kukri', 'Decurion\'s Dagger'},
-        -- Main = {'Harpe', 'Trailer\'s Kukri', 'Marauder\'s Knife', 'Mrc.Cpt. Kukri', 'Decurion\'s Dagger'},
+        Main = {'Blau Dolch', 'Trailer\'s Kukri', 'Marauder\'s Knife', 'Mrc.Cpt. Kukri', 'Decurion\'s Dagger'},
         Sub = {'Thief\'s Knife', 'Bone Knife +1', 'Mrc.Cpt. Kukri', 'Decurion\'s Dagger'},
         Range = {'Arbalest +1', 'Zamburak +1', 'Power Crossbow'},
         -- Ammo = {''},
@@ -37,7 +36,7 @@ local sets = {
         Ear2 = 'Drone Earring',
     },
     ['SA'] = {
-        Head = 'Emperor Hairpin',
+        Head = 'Assassin\'s Bonnet',
         Body = 'Dragon Harness',
         Neck = 'Spike Necklace',
         Ring1 = 'Deft Ring',
