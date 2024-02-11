@@ -17,7 +17,12 @@ local sets = {
     },
     ['MND'] = {
         Body = 'Errant Hpl.',
-        Neck = 'Justice Badge',
+        Back = 'Prism Cape',
+        Neck = 'Promise Badge',
+        Ring1 = 'Tamas Ring',
+        Legs = 'Errant Slops',
+        Waist = 'Penitent\'s Rope',
+        Feet = 'Errant Pigaches',
     },
     ['Fishing'] = {
         Range = 'Halcyon Rod',
@@ -73,17 +78,10 @@ profile.HandleDefault = function()
     if (player.Status == 'Resting') then
         gFunc.Equip('Main', 'Pluto\'s Staff');
         gFunc.Equip('Neck', 'Checkered Scarf');
-        if (player.MainJobSync < 59) then
-            gFunc.Equip('Body', 'Seer\'s Tunic');
-        end
         gFunc.Equip('Legs', 'Baron\'s Slops');
     else
         if (Settings.fishing == false) then
             gFunc.EquipSet('Idle');
-
-            if (player.MainJobSync < 59) then
-                gFunc.Equip('Head', 'Silver Hairpin');
-            end
         elseif (Settings.fishing == true) then
             gFunc.EquipSet('Fishing');
         end
@@ -179,6 +177,10 @@ profile.HandleDefault = function()
                 gFunc.Equip('Main', 'Apollo\'s Staff');
             end
         end
+    end
+
+    if (string.match(action.Name, 'Cure')) then
+        gFunc.EquipSet('MND');
     end
 
     -- SANDY IS THE BEST FUCK WINDY FUCK MIMI
