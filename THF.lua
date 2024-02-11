@@ -118,6 +118,10 @@ profile.HandleDefault = function()
         end
     end
 
+    if (string.match(env.Area, 'San d\'Oria')) then
+        gFunc.Equip('Body', 'Kingdom Aketon');
+    end
+
     
 end
 
