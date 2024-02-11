@@ -104,6 +104,10 @@ profile.HandleDefault = function()
         gFunc.EquipSet('Idle');
     end
 
+    if (string.match(env.Area, 'San d\'Oria')) then
+        gFunc.Equip('Body', 'Kingdom Aketon');
+    end
+
 
 end
 
@@ -187,12 +191,6 @@ profile.HandleMidcast = function()
     elseif (action.Name == 'Invisible') then
         gFunc.Equip('Hands', 'Dream Mittens +1');
     end
-
-    if (string.match(env.Area, 'San d\'Oria')) then
-        gFunc.Equip('Body', 'Kingdom Aketon');
-    end
-
-    
 end
 
 profile.HandlePreshot = function()
