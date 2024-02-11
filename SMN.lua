@@ -179,10 +179,6 @@ profile.HandleDefault = function()
         end
     end
 
-    if (string.match(action.Name, 'Cure')) then
-        gFunc.EquipSet('MND');
-    end
-
     -- SANDY IS THE BEST FUCK WINDY FUCK MIMI
     -- gFunc.Message(env.Area);
     if (string.match(env.Area, 'San d\'Oria')) then
