@@ -1,7 +1,7 @@
 local profile = {};
 local sets = {
     ['Idle_Priority'] = {
-        Main = {'Earth Staff', 'Solid Wand', 'Yew Wand +1'},   
+        Main = {'Terra\'s Staff', 'Solid Wand', 'Yew Wand +1'},   
         -- Sub = {'Maple Shield'},
         Ammo = {'Morion Tathlum'},
         -- Head = {'Wizard\'s Petasos', 'Seer\'s Crown +1'},
@@ -14,7 +14,7 @@ local sets = {
         Ring2 = {'Genius Ring'},
         Back = {'Black Cape +1'},
         Waist = {'Penitent\'s Rope', 'Mrc.Cpt. Belt'},
-        Legs = {'Zenith Slacks', 'Seer\'s Slacks'},
+        Legs = {'Zenith Slacks', 'Magic Slacks', 'Seer\'s Slacks'},
         Feet = {'Wizard\'s Sabots', 'Seer\'s Pumps +1'},
     },
     ['MND'] = {
@@ -32,6 +32,7 @@ local sets = {
         -- Body = 'Errant Hpl.',
         Back = 'Black Cape +1',
         Neck = 'Philomath Stole',
+        Legs = 'Magic Slacks',
         Ring1 = 'Tamas Ring',
         Ring2 = 'Snow Ring',
         Ammo = 'Phtm. Tathlum',
@@ -49,12 +50,17 @@ local sets = {
         Neck = 'Elemental Torque',
         Hands = 'Wizard\'s Gloves',
         Ear1 = 'Moldavite Earring',
+        Legs = 'Druid\'s Slops',
         Hands = 'Zenith Mitts',
     },
     ['EnhancingSkill'] = {
     },
     ['DarkSkill'] = {
         Legs= 'Wizard\'s Tonban',
+    },
+    ['EnmityDown'] = {
+        Head = 'Raven Beret',
+        Back = 'Errant Cape',
     },
 };
 profile.Sets = sets;
@@ -124,7 +130,7 @@ profile.HandleMidcast = function()
         if (action.Name == 'Stoneskin') then
             gFunc.Equip('Main', 'Water Staff');
         else
-            gFunc.Equip('Main', 'Earth Staff');
+            gFunc.Equip('Main', 'Terra\'s Staff');
         end
         
     elseif (action.Element == "Thunder") then
@@ -170,12 +176,11 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(gFunc.Combine(sets.INT, sets.DarkSkill));
     end
 
-    if (action.Skill ~= 'Enfeebling Magic') then
-        gFunc.Equip('Head', 'Raven Beret');
+    if (action.Skill ~= 'Enfeebling Magic' and action.Skill ~= 'Elemental Magic') then
+        gFunc.EquipSet(sets.EnmityDown);
     end
 
     if (action.Name == 'Sneak') then
-        gFunc.Message('CASTING SNEAK');
         gFunc.Equip('Feet', 'Dream Boots +1');
     elseif (action.Name == 'Invisible') then
         gFunc.Equip('Hands', 'Dream Mittens +1');
