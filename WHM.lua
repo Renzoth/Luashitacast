@@ -21,6 +21,7 @@ local sets = {
         Back = 'Prism Cape',
         Neck = 'Promise Badge',
         Ring1 = 'Tamas Ring',
+        Ring2 = 'Aqua Ring',
         Legs = 'Errant Slops',
         Waist = 'Penitent\'s Rope',
         Feet = 'Errant Pigaches',
@@ -81,6 +82,7 @@ end
 
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
+    local env = gData.GetEnvironment();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
 
     if (myLevel ~= Settings.CurrentLevel) then
@@ -91,20 +93,15 @@ profile.HandleDefault = function()
     if (player.Status == 'Resting') then
         gFunc.Equip('Neck', 'Checkered Scarf');
         gFunc.Equip('Body', 'Errant Hpl.');
+        gFunc.Equip('Main', 'Pluto\'s Staff');
         if (player.SubJob == 'BLM') then
             gFunc.Equip('Back', 'Wizard\'s Mantle')
-        end
-        gFunc.Equip('Legs', 'Baron\'s Slops');
-    elseif (player.Status == 'Engaged') then
-        gFunc.EquipSet('IdleNin');
-        if (player.IsMoving == false) then
-            gFunc.Equip('Hands', 'Dusk Gloves');
         end
     else
         gFunc.EquipSet('Idle');
     end
 
-    if (string.match(env.Area, 'San d\'Oria')) then
+    if (string.match(env.Area, 'San d\'Oria') and not string.match(env.Area, 'Airship')) then
         gFunc.Equip('Body', 'Kingdom Aketon');
     end
 
