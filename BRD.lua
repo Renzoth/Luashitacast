@@ -17,23 +17,25 @@ local sets = {
         Feet = 'Errant Pigaches',
     },
     ['Idle'] = {
-        Main = 'Earth Staff',
+        Main = 'Terra\'s Staff',
         Range = 'Cornette +1',
+        Head = 'Demon Helm',
         Neck = 'Wind Torque',
         Ear1 = 'Magnetic Earring',
         Ear2 = 'Loquac. Earring',
-        Body = 'Vermillion Cloak',
-        Hands = 'Choral Cuffs',
-        Ring2 = 'Bomb Queen Ring',
-        Ring1 = 'Tamas Ring',
+        Body = 'Sha\'ir Manteel',
+        Hands = 'Dst. Mittens +1',
+        Ring2 = 'Merman\'s Ring',
+        Ring1 = 'Merman\'s Ring',
         Back = 'Jester\'s Cape +1',
         Waist = 'Corsette +1',
-        Legs = 'Bard\'s Cannions',
-        Feet = 'Rostrum Pumps'
+        Legs = 'Dst. Subligar +1',
+        Feet = 'Dst. Leggings +1'
     },
     ['Song_Precast'] = {
         Body = 'Savage Separates',
         Neck = 'Bloodbead Amulet',
+        Body = 'Sha\'ir Manteel',
         Ring1 = 'Minstrel\'s Ring',
         Ring2 = 'Bomb Queen Ring',
         Legs = 'Bard\'s Cannions',
@@ -44,6 +46,7 @@ local sets = {
         Body = 'Errant Hpl.',
         Hands = 'Choral Cuffs',
         Ring1 = 'Tamas Ring',
+        Ring2 = 'Light Ring',
         Legs = 'Bard\'s Cannions',
         Feet = 'Savage Gaiters',
     },
@@ -53,6 +56,7 @@ local sets = {
         Back = 'Prism Cape',
         Neck = 'Promise Badge',
         Ring1 = 'Tamas Ring',
+        Ring2 = 'Aqua Ring',
         Legs = 'Errant Slops',
         Waist = 'Penitent\'s Rope',
         Feet = 'Errant Pigaches',
@@ -79,12 +83,11 @@ end
 
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
+    local env = gData.GetEnvironment();
 
     if (player.SubJob == 'NIN') then
         gFunc.Equip('Body', 'Scorpion Harness');
         gFunc.Equip('Head', 'Emperor Hairpin');
-    else
-        -- gFunc.Equip('Body', 'Vermillion Cloak');
     end
 
     if (player.Status == 'Resting') then
@@ -94,7 +97,7 @@ profile.HandleDefault = function()
         gFunc.EquipSet(sets.Idle);
     end
 
-    if (string.match(env.Area, 'San d\'Oria')) then
+    if (string.match(env.Area, 'San d\'Oria') and not string.match(env.Area, 'Airship')) then
         gFunc.Equip('Body', 'Kingdom Aketon');
     end
 end
