@@ -9,24 +9,24 @@ local sets = {
         Ear1 = {'Loquac. Earring', 'Energy Earring'},
         Ear2 = {'Magnetic Earring', 'Energy Earring'},
         Body = {'Duelist\'s Tabard', 'Vermillion Cloak'},
-        Hands = {'Nashira Gages', 'Duelist\'s Gloves', 'Savage Gauntlets'},
-        Ring1 = {'Tamas Ring', 'Astral Ring'},
-        Ring2 = {'Snow Ring', 'Astral Ring'},
+        Hands = {'Dst. Mittens +1', 'Duelist\'s Gloves', 'Savage Gauntlets'},
+        Ring1 = {'Merman\'s Ring', 'Astral Ring'},
+        Ring2 = {'Merman\'s Ring', 'Astral Ring'},
         Back = {'Errant Cape', 'White Cape +1'},
         Waist = {'Penitent\'s Rope', 'Ryl.Kgt. Belt', 'Friar\'s Rope'},
-        Legs = {'Zenith Slacks', 'Savage Loincloth'},
-        Feet = {'Warlock\'s Boots', 'Bounding Boots'},
+        Legs = {'Dst. Subligar +1', 'Savage Loincloth'},
+        Feet = {'Dst. Leggings +1', 'Bounding Boots'},
     },
     ['IdleNin_Priority'] = {
-        Main = {'Joyeuse'},   
-        Sub = {'Ryl.Grd. Fleuret'},
+        Main = {'Blau Dolch'},   
+        Sub = {'Joyeuse'},
         Head = {'Duelist\'s Chapeau', 'Emperor Hairpin'},
         Neck = {'Peacock Amulet'},
         Ear1 = {'Brutal Earring', 'Spike Earring', 'Energy Earring'},
         Ear2 = {'Magnetic Earring', 'Spike Earring', 'Energy Earring'},
         Body = {'Scorpion Harness', 'Savage Separates'},
         Hands = {'Battle Gloves'},
-        Ring1 = {'Woodsman Ring'},
+        Ring1 = {'Sniper\'s Ring'},
         Ring2 = {'Sniper\'s Ring', 'Astral Ring'},
         Back = {'Amemet Mantle +1', 'White Cape +1'},
         Waist = {'Swift Belt', 'Friar\'s Rope'},
@@ -38,6 +38,7 @@ local sets = {
         Back = 'Prism Cape',
         Neck = 'Promise Badge',
         Ring1 = 'Tamas Ring',
+        Ring2 = 'Aqua Ring',
         Legs = 'Errant Slops',
         Waist = 'Penitent\'s Rope',
         Feet = 'Errant Pigaches',
@@ -110,6 +111,7 @@ end
 
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
+    local env = gData.GetEnvironment();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
 
     if (myLevel ~= Settings.CurrentLevel) then
@@ -143,7 +145,7 @@ profile.HandleDefault = function()
         end
     end
 
-    if (string.match(env.Area, 'San d\'Oria')) then
+    if (string.match(env.Area, 'San d\'Oria') and not string.match(env.Area, 'Airship')) then
         gFunc.Equip('Body', 'Kingdom Aketon');
     end
 
