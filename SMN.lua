@@ -20,6 +20,7 @@ local sets = {
         Back = 'Prism Cape',
         Neck = 'Promise Badge',
         Ring1 = 'Tamas Ring',
+        Ring2 = 'Aqua Ring',
         Legs = 'Errant Slops',
         Waist = 'Penitent\'s Rope',
         Feet = 'Errant Pigaches',
@@ -178,10 +179,10 @@ profile.HandleDefault = function()
             end
         end
     end
-
+        
     -- SANDY IS THE BEST FUCK WINDY FUCK MIMI
     -- gFunc.Message(env.Area);
-    if (string.match(env.Area, 'San d\'Oria')) then
+    if (string.match(env.Area, 'San d\'Oria') and not string.match(env.Area, 'Airship')) then
         gFunc.Equip('Head', 'Summoner\'s Horn');
         gFunc.Equip('Body', 'Kingdom Aketon');
     end
