@@ -41,6 +41,7 @@ local sets = {
         Ring1 = 'Tamas Ring',
     },
     ['HealingSkill'] = {
+        Body = 'Noble\'s Tunic',
         Hands = 'Healer\'s Mitts',
         Neck = 'Healing Torque',
     },
@@ -156,6 +157,7 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.EnhancingSkill);
             if (string.match(action.Name, 'Regen')) then
                 gFunc.Equip('Main', 'Rucke\'s Rung');
+                gFunc.Equip('Body', 'Cleric\'s Bliaut');
             end
         end
     elseif (action.Skill == 'Healing Magic') then
