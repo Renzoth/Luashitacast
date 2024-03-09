@@ -73,6 +73,7 @@ local sets = {
         Legs = 'Duelist\'s Tights',
         Ear1 = 'Moldavite Earring',
         Hands = 'Zenith Mitts',
+        Feet = 'Nashira Crackows',
     },
     ['EnhancingSkill'] = {
         Legs = 'Warlock\'s Tights',
