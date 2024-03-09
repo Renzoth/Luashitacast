@@ -52,6 +52,7 @@ local sets = {
         Ear1 = 'Moldavite Earring',
         Legs = 'Druid\'s Slops',
         Hands = 'Zenith Mitts',
+        Feet = 'Nashira Crackows',
     },
     ['EnhancingSkill'] = {
     },
