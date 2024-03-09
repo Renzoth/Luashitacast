@@ -214,6 +214,7 @@ profile.HandleMidcast = function()
         gFunc.Equip('Neck', 'Smn. Torque');
         gFunc.Equip('Hands', 'Summoner\'s Brcr.');
         gFunc.Equip('Body', 'Evoker\'s Doublet');
+        gFunc.Equip('Feet', 'Nashira Crackows');
     end
 end
 
