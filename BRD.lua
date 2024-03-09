@@ -44,7 +44,7 @@ local sets = {
     ['Debuff'] = {
         Head = 'Errant Hat',
         Body = 'Errant Hpl.',
-        Hands = 'Choral Cuffs',
+        Hands = 'Choral Cuffs +1',
         Ring1 = 'Tamas Ring',
         Ring2 = 'Light Ring',
         Legs = 'Bard\'s Cannions',
@@ -135,7 +135,7 @@ profile.HandleMidcast = function()
     local player = gData.GetPlayer();
 
     if (action.Type == 'Bard Song') then
-        gFunc.Equip('Hands', 'Choral Cuffs');
+        gFunc.Equip('Hands', 'Choral Cuffs +1');
         if (action.Name == 'Valor Minuet') or (action.Name == 'Valor Minuet II') or
             (action.Name == 'Valor Minuet III') or (action.Name == 'Valor Minuet IV') then
             gFunc.Equip('Range', 'Cornette +1');
