@@ -19,7 +19,7 @@ local sets = {
     },
     ['TreasureHunter'] = {
         Neck = 'Nanaa\'s Charm',
-        -- Hands = '',
+        Hands = 'Assassin\'s Armlets',
     },
     ['Steal'] = {
         Head = 'Rogue\'s Bonnet',
