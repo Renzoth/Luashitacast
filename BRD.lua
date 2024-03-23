@@ -41,14 +41,30 @@ local sets = {
         Legs = 'Bard\'s Cannions',
         Feet = 'Savage Gaiters',
     },
-    ['Debuff'] = {
-        Head = 'Errant Hat',
-        Body = 'Errant Hpl.',
-        Hands = 'Choral Cuffs +1',
-        Ring1 = 'Tamas Ring',
-        Ring2 = 'Light Ring',
-        Legs = 'Bard\'s Cannions',
-        Feet = 'Savage Gaiters',
+    ['Singing'] = {
+        Head = 'Demon Helm',
+        Hands = 'Chl. Cuffs +1',
+    },
+    ['Wind'] = {
+        Neck = 'Wind Torque',
+        Legs = 'Choral Cannions',
+    },
+    ['String'] = {
+
+    },
+    -- 64 + 54
+    ['CHR'] = { -- AND MACC
+        Head = 'Errant Hat', -- +3
+        Body = 'Errant Hpl.', -- +10
+        Hands = 'Chl. Cuffs +1', -- +7
+        Ear1 = 'Melody Earring +1', -- +2
+        Ear2 = 'Melody Earring +1', -- +2
+        Waist = 'Corsette +1', -- +6
+        Ring1 = 'Tamas Ring', -- MACC+5
+        Ring2 = 'Light Ring', -- +5
+        Legs = 'Bard\'s Cannions', -- +7
+        Feet = 'Savage Gaiters', -- +2
+        Back = 'Jester\'s Cape +1', -- +10
     },
     ['MND'] = {
         Main = 'Apollo\'s Staff',
@@ -135,32 +151,41 @@ profile.HandleMidcast = function()
     local player = gData.GetPlayer();
 
     if (action.Type == 'Bard Song') then
-        gFunc.Equip('Hands', 'Choral Cuffs +1');
-        if (action.Name == 'Valor Minuet') or (action.Name == 'Valor Minuet II') or
-            (action.Name == 'Valor Minuet III') or (action.Name == 'Valor Minuet IV') then
+        gFunc.Message(action.Skill)
+
+        if (string.match(action.Name, 'Minuet')) then
+            gFunc.EquipSet(sets.Wind);
             gFunc.Equip('Range', 'Cornette +1');
-        elseif (action.Name == 'Advancing March') or (action.Name == 'Victory March') then
+        elseif (string.match(action.Name, 'March')) then
+            gFunc.EquipSet(sets.Wind);
             gFunc.Equip('Range', 'Faerie Piccolo');
-        elseif (action.Name == 'Sword Madrigal') or (action.Name == 'Blade Madrigal') then
+        elseif (string.match(action.Name, 'Madrigal')) then
+            gFunc.EquipSet(sets.Wind);
             gFunc.Equip('Range', 'Traversiere +1');
-        elseif (action.Name == 'Battlefield Elegy') or (action.Name == 'Carnage Elegy') then
+        elseif (string.match(action.Name, 'Carol')) then
+            gFunc.EquipSet(sets.Wind);
+            gFunc.Equip('Range', 'Crumhorn +1');
+        elseif (string.match(action.Name, 'Paeon')) then
+            gFunc.EquipSet(sets.String);
+            gFunc.Equip('Range', 'Ebony Harp +1');
+        elseif (string.match(action.Name, 'Mazurka')) then
+            gFunc.EquipSet(sets.String);
+            gFunc.Equip('Range', 'Ebony Harp +1');
+        elseif (string.match(action.Name, 'Elegy')) then
+            gFunc.EquipSet(gFunc.Combine(sets.CHR, sets.Wind));
             gFunc.Equip('Range', 'Horn +1');
             gFunc.Equip('Main', 'Terra\'s Staff');
-            gFunc.EquipSet('Debuff');
-        elseif (string.match(action.Name, 'Lullaby')) or (action.Name == 'Magic Finale') or (string.match(action.Name, 'Requiem')) then
+        elseif (string.match(action.Name, 'Lullaby')) then
             if (action.Name == 'Horde Lullaby') then    
+                gFunc.EquipSet(gFunc.Combine(sets.CHR, sets.String));
                 gFunc.Equip('Range', 'Ebony Harp +1');
             else    
+                gFunc.EquipSet(gFunc.Combine(sets.CHR, sets.Wind));
                 gFunc.Equip('Range', 'Ryl.Spr. Horn');
             end
             gFunc.Equip('Main', 'Apollo\'s Staff');
-            gFunc.EquipSet('Debuff');
-        elseif (action.Name == 'Chocobo Mazurka') or (string.match(action.Name, 'Paeon')) then
-            gFunc.Equip('Range', 'Ebony Harp +1');
-        else
-            gFunc.Equip('Range', 'Ryl.Spr. Horn');
-            -- gFunc.Equip('Range', 'Ebony Harp +1');
         end
+        gFunc.EquipSet(sets.Singing);
     end
 
     if (string.match(action.Name, 'Cure')) then
