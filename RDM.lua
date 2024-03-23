@@ -202,9 +202,6 @@ profile.HandleMidcast = function()
     elseif (action.Skill == 'Healing Magic') then
         gFunc.EquipSet(gFunc.Combine(sets.MND, sets.HealingSkill));
     elseif (action.Skill == 'Enfeebling Magic') then
-        if (player.SubJob ~= 'NIN' and player.MainJobSync < 51) then
-            gFunc.Equip('Main', 'Fencing Degen');
-        end
         if (action.Type == 'White Magic') then
             gFunc.EquipSet(gFunc.Combine(sets.MND, sets.EnfeeblingSkill));
         elseif (action.Type == 'Black Magic') then
