@@ -23,9 +23,9 @@ local sets = {
         Head = {'Duelist\'s Chapeau', 'Emperor Hairpin'},
         Neck = {'Peacock Amulet'},
         Ear1 = {'Brutal Earring', 'Spike Earring', 'Energy Earring'},
-        Ear2 = {'Magnetic Earring', 'Spike Earring', 'Energy Earring'},
-        Body = {'Scorpion Harness', 'Savage Separates'},
-        Hands = {'Battle Gloves'},
+        Ear2 = {'Stealth Earring', 'Spike Earring', 'Energy Earring'},
+        Body = {'Scp. Harness +1', 'Savage Separates'},
+        Hands = {'Nashira Gages', 'Battle Gloves'},
         Ring1 = {'Sniper\'s Ring'},
         Ring2 = {'Sniper\'s Ring', 'Astral Ring'},
         Back = {'Amemet Mantle +1', 'White Cape +1'},
@@ -37,6 +37,7 @@ local sets = {
         Body = 'Errant Hpl.',
         Back = 'Prism Cape',
         Neck = 'Promise Badge',
+        Hands = 'Nashira Gages',
         Ring1 = 'Tamas Ring',
         Ring2 = 'Aqua Ring',
         Legs = 'Errant Slops',
@@ -68,6 +69,7 @@ local sets = {
     ['EnmityDown'] = {
         Head = 'Raven Beret',
         Back = 'Errant Cape',
+        Hands = 'Nashira Gages',
     },
     ['ElementalSkill'] = { -- and MAB
         Legs = 'Duelist\'s Tights',
@@ -174,7 +176,7 @@ profile.HandleMidcast = function()
         elseif (action.Element == "Ice") then
             gFunc.Equip('Main', 'Aquilo\'s Staff');
         elseif (action.Element == "Wind") then
-            gFunc.Equip('Main', 'Wind Staff');
+            gFunc.Equip('Main', 'Auster\'s Staff');
         elseif (action.Element == "Earth") then
             if (action.Name == 'Stoneskin') then
                 gFunc.Equip('Main', 'Water Staff');
