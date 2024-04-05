@@ -32,6 +32,21 @@ local sets = {
         Legs = 'Dst. Subligar +1',
         Feet = 'Dst. Leggings +1'
     },
+    ['Refresh'] = {
+        Main = 'Terra\'s Staff',
+        Range = 'Cornette +1',
+        Neck = 'Wind Torque',
+        Ear1 = 'Magnetic Earring',
+        Ear2 = 'Loquac. Earring',
+        Body = 'Vermillion Cloak',
+        Hands = 'Dst. Mittens +1',
+        Ring2 = 'Merman\'s Ring',
+        Ring1 = 'Merman\'s Ring',
+        Back = 'Jester\'s Cape +1',
+        Waist = 'Corsette +1',
+        Legs = 'Dst. Subligar +1',
+        Feet = 'Dst. Leggings +1'
+    },
     ['Song_Precast'] = {
         Body = 'Savage Separates',
         Neck = 'Bloodbead Amulet',
@@ -75,7 +90,7 @@ local sets = {
         Ring2 = 'Aqua Ring',
         Legs = 'Errant Slops',
         Waist = 'Penitent\'s Rope',
-        Feet = 'Errant Pigaches',
+        Feet = 'Suzaku\'s Sune-Ate',
     },
 };
 profile.Sets = sets;
@@ -88,7 +103,7 @@ profile.OnLoad = function()
 
     AshitaCore:GetChatManager():QueueCommand(1, '/macro book 1');
     AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1');
-    AshitaCore:GetChatManager():QueueCommand(1, '/lockstyleset 1');
+    AshitaCore:GetChatManager():QueueCommand(1, '/lockstyle on');
 end
 
 profile.OnUnload = function()
@@ -102,7 +117,7 @@ profile.HandleDefault = function()
     local env = gData.GetEnvironment();
 
     if (player.SubJob == 'NIN') then
-        gFunc.Equip('Body', 'Scorpion Harness');
+        gFunc.Equip('Body', 'Scorpion Harness +1');
         gFunc.Equip('Head', 'Emperor Hairpin');
     end
 
@@ -110,7 +125,13 @@ profile.HandleDefault = function()
         gFunc.Equip('Main', 'Dark Staff');
         gFunc.Equip('Body', 'Errant Hpl.');
     else
-        gFunc.EquipSet(sets.Idle);
+        
+        if (player.MPP <= 70) then
+            gFunc.EquipSet(sets.Refresh);
+        else
+            gFunc.EquipSet(sets.Idle);
+        end
+        
     end
 
     if (string.match(env.Area, 'San d\'Oria') and not string.match(env.Area, 'Airship')) then
