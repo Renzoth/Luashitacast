@@ -102,6 +102,13 @@ profile.HandleDefault = function()
         gFunc.EquipSet('Idle');
     end
 
+    if (pet ~= nil) then
+        gFunc.Equip('Waist', 'Avatar Belt')
+        if (pet.Name == 'Ifrit') then
+            gFunc.Equip('Main', 'Fire Staff');
+        end
+    end
+
     if (string.match(env.Area, 'San d\'Oria') and not string.match(env.Area, 'Airship')) then
         gFunc.Equip('Body', 'Kingdom Aketon');
     end
