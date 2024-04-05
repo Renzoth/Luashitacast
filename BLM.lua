@@ -14,7 +14,7 @@ local sets = {
         Ring2 = {'Genius Ring'},
         Back = {'Black Cape +1'},
         Waist = {'Penitent\'s Rope', 'Mrc.Cpt. Belt'},
-        Legs = {'Zenith Slacks', 'Magic Slacks', 'Seer\'s Slacks'},
+        Legs = {'Zenith Slacks', 'Druid\'s Slops', 'Seer\'s Slacks'},
         Feet = {'Wizard\'s Sabots', 'Seer\'s Pumps +1'},
     },
     ['MND'] = {
@@ -85,6 +85,7 @@ end
 
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
+    local pet = gData.GetPet();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
 
     if (myLevel ~= Settings.CurrentLevel) then
@@ -101,6 +102,13 @@ profile.HandleDefault = function()
 
     else
         gFunc.EquipSet('Idle');
+    end
+
+    if (pet ~= nil) then
+        gFunc.Equip('Waist', 'Avatar Belt')
+        if (pet.Name == 'Ifrit') then
+            gFunc.Equip('Main', 'Fire Staff');
+        end
     end
 
 
