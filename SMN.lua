@@ -102,7 +102,7 @@ profile.HandleDefault = function()
         else
             gFunc.Equip('Head', 'Summoner\'s Horn');
             gFunc.Equip('Body', 'Austere Robe');
-            gFunc.Equip('Hands', 'Nashir Gages');
+            gFunc.Equip('Hands', 'Nashira Gages');
             
             if (pet.Name == 'Garuda') then
                 -- GARUDA
@@ -112,7 +112,7 @@ profile.HandleDefault = function()
                 if (env.RawWeatherElement == 'Wind') then
                     gFunc.Equip('Head', 'Summoner\'s Horn');
                 end
-                gFunc.Equip('Main', 'Wind Staff');
+                gFunc.Equip('Main', 'Auster\'s Staff');
                 -- END GARUDA
             elseif (pet.Name == 'Titan') then
                 -- EARTH
