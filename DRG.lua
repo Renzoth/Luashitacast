@@ -1,20 +1,30 @@
 local profile = {};
 local sets = {
     ['Idle_Priority'] = {
-        Main = {'Gnd.Kgt. Lance', 'Darksteel Lance', 'Holy lance', 'Mythril Lance', 'Peregrine'},
-        Head = {'Emperor Hairpin'},
+        -- Main = {'Gae Bolg', 'Gnd.Kgt. Lance', 'Darksteel Lance', 'Holy lance', 'Mythril Lance', 'Peregrine'},
+        Head = {'Optical Hat', 'Emperor Hairpin'},
         Neck = {'Peacock Amulet'},
-        Ear1 = {'Spike Earring', 'Beetle Earring +1'},
-        Ear2 = {'Spike Earring', 'Beetle Earring +1'},
-        Body = {'Scorpion Harness', 'Brigandine', 'Savage Separates'},
+        Ear1 = {'Beastly Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Ear2 = {'Brutal Earring', 'Spike Earring', 'Beetle Earring +1'},
+        Body = {'Scp. Harness +1', 'Brigandine', 'Savage Separates'},
         Hands = {'Drachen Fng. Gnt.', 'Battle Gloves'},
         Ring1 = {'Sniper\'s Ring'},
         Ring2 = {'Sniper\'s Ring'},
         Back = {'Amemet Mantle +1', 'Traveler\'s Mantle'},
         Waist = {'Swift Belt', 'Brave Belt'},
-        Legs = {'Drachen Brais', 'Republic Subligar'},
-        Feet = {'Bounding Boots'},
+        Legs = {'Homam Cosciales', 'Drachen Brais', 'Republic Subligar'},
+        Feet = {'Homam Gambieras', 'Bounding Boots'},
     },
+    ['STR'] = {
+        Head = 'Wyvern Helm',
+        Hands = 'Pallas\'s Bracelets',
+        -- Body = 'Drachen Mail',
+        Ring1 = 'Flame Ring',
+        Ring2 = 'Flame Ring',
+        Waist = 'Warwolf Belt',
+        Legs = 'Barone Cosciales',
+        Feet = 'Barone Gambieras',
+    }
 };
 profile.Sets = sets;
 
@@ -37,35 +47,41 @@ end
 
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
+    local pet = gData.GetPet();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
 
     if (myLevel ~= Settings.CurrentLevel) then
         gFunc.EvaluateLevels(profile.Sets, myLevel);
         Settings.CurrentLevel = myLevel;
     end
-
-    if (petAction ~= nil) then
-        -- gFunc.Equip('Head', 'Drachen Armet');
-        return;
-    end
-    
-    if (player.SubJob == 'WHM' or player.SubJob == 'RDM') then
+    if (player.Status == 'Idle') then
         gFunc.EquipSet('Idle');
-        gFunc.Equip('Ring2', 'Astral Ring');
-    else
+        if (pet ~= nil) then
+            if (pet.HPP < 100) then
+                gFunc.Equip('Body', 'Drachen Mail')
+            end
+        end
+    elseif (player.Status == 'Engaged') then
         gFunc.EquipSet('Idle');
-    end
-
-    if (player.HPP <= 50 and player.SubJob == 'RDM') then
-        gFunc.Message("HEAL!")
+        if (player.IsMoving == false) then
+            gFunc.Equip('Hands', 'Dusk Gloves');
+        end
     end
 end
 
 profile.HandleAbility = function()
     local action = gData.GetAction();
 
-    if (string.match(action.Name, 'Jump')) then
+    if (action.Name == "Jump") then
+        gFunc.Equip('Legs', 'Barone Cosciales');
         gFunc.Equip('Feet', 'Drachen Greaves');
+    elseif (action.Name == "High Jump") then
+        gFunc.Equip('Legs', 'Wyrm Brais');
+        gFunc.Equip('Ring1', 'Vaulter\'s Ring');
+    end
+
+    if (action.Name == 'Call Wyvern') then
+        gFunc.Equip('Body', 'Wyrm Mail');
     end
 end
 
@@ -86,12 +102,7 @@ profile.HandleMidshot = function()
 end
 
 profile.HandleWeaponskill = function()
-    gFunc.Equip('Head', 'Drachen Armet');
-    gFunc.Equip('Ring1', 'Courage Ring');
-    gFunc.Equip('Ring2', 'Courage Ring');
-    gFunc.Equip('Feet', 'Savage Gaiters');
-    gFunc.Equip('Body', 'Savage Separates');
-    gFunc.Equip('Waist', 'Rly.Kgt. Belt');
+    gFunc.EquipSet(sets.STR);
 end
 
 return profile;
