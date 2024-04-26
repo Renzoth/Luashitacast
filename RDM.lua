@@ -169,6 +169,7 @@ end
 profile.HandleMidcast = function()
     local action = gData.GetAction();
     local player = gData.GetPlayer();
+    local env = gData.GetEnvironment();
 
     if (player.SubJob ~= 'NIN') then
         if (action.Element == "Fire") then
@@ -216,11 +217,13 @@ profile.HandleMidcast = function()
         end
     elseif (action.Skill == 'Dark Magic') then
         gFunc.EquipSet(sets.INT);
+        if (env.RawWeatherElement == 'Dark') then
+            gFunc.Equip('Main', 'Diabolos\'s Pole');
+        end
     end
 
     if (action.Skill ~= 'Enfeebling Magic' and action.Skill ~= 'Elemental Magic') then
         gFunc.EquipSet(sets.EnmityDown);
-
     end
 
     if (action.Name == 'Sneak') then
