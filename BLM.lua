@@ -3,19 +3,19 @@ local sets = {
     ['Idle_Priority'] = {
         Main = {'Terra\'s Staff', 'Solid Wand', 'Yew Wand +1'},   
         -- Sub = {'Maple Shield'},
-        Ammo = {'Morion Tathlum'},
-        -- Head = {'Wizard\'s Petasos', 'Seer\'s Crown +1'},
-        Neck = {'Philomath Stole', 'Black Neckerchief'},
+        Ammo = {'Phtm. Tathlum', 'Morion Tathlum'},
+        Head = {'Demon Helm', 'Wizard\'s Petasos', 'Seer\'s Crown +1'},
+        Neck = {'Elemental Torque', 'Philomath Stole', 'Black Neckerchief'},
         Ear1 = {'Loquac. Earring', 'Moldavite Earring'},
         Ear2 = {'Magnetic Earring', 'Morion Earring'},
-        Body = {'Vermillion Cloak', 'Wizard\'s Coat', 'Seer\'s Tunic'},
+        Body = {'Sorcerer\'s Coat', 'Vermillion Cloak', 'Wizard\'s Coat', 'Seer\'s Tunic'},
         Hands = {'Zenith Mitts', 'Wizard\'s Gloves', 'Seer\'s Mitts +1'},
         Ring1 = {'Tamas Ring', 'Astral Ring'},
-        Ring2 = {'Genius Ring'},
-        Back = {'Black Cape +1'},
+        Ring2 = {'Snow Ring', 'Genius Ring'},
+        Back = {'Prism Cape', 'Black Cape +1'},
         Waist = {'Penitent\'s Rope', 'Mrc.Cpt. Belt'},
         Legs = {'Zenith Slacks', 'Druid\'s Slops', 'Seer\'s Slacks'},
-        Feet = {'Wizard\'s Sabots', 'Seer\'s Pumps +1'},
+        Feet = {'Nashira Crackows', 'Wizard\'s Sabots', 'Seer\'s Pumps +1'},
     },
     ['MND'] = {
         Body = 'Errant Hpl.',
@@ -28,11 +28,11 @@ local sets = {
     },
     ['INT'] = {
         Head = 'Wizard\'s Petasos',
-        Body = 'Black Cotehardie',
-        -- Body = 'Errant Hpl.',
-        Back = 'Black Cape +1',
+        Body = 'Errant Hpl.',
+        Back = 'Prism Cape',
         Neck = 'Philomath Stole',
-        Legs = 'Magic Slacks',
+        Legs = 'Errant Slops',
+        Feet = 'Rostrum Pumps',
         Ring1 = 'Tamas Ring',
         Ring2 = 'Snow Ring',
         Ammo = 'Phtm. Tathlum',
@@ -48,9 +48,10 @@ local sets = {
     },
     ['ElementalSkill'] = { -- and MAB
         Neck = 'Elemental Torque',
+        Body = 'Igqira Weskit',
         Hands = 'Wizard\'s Gloves',
         Ear1 = 'Moldavite Earring',
-        Legs = 'Druid\'s Slops',
+        -- Legs = 'Druid\'s Slops',
         Hands = 'Zenith Mitts',
         Feet = 'Nashira Crackows',
     },
@@ -121,8 +122,8 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
-    gFunc.Equip('Head', 'Warlock\'s Chapeau');
-    gFunc.Equip('Body', 'Duelist\'s Tabard');
+    gFunc.Equip('Ear1', 'Loquac. Earring');
+    gFunc.Equip('Feet', 'Rostrum Pumps');
 end
 
 profile.HandleMidcast = function()
@@ -165,9 +166,6 @@ profile.HandleMidcast = function()
     end
 
     if (action.Skill == 'Enfeebling Magic') then
-        if (player.SubJob ~= 'NIN' and player.MainJobSync < 51) then
-            gFunc.Equip('Main', 'Fencing Degen');
-        end
         if (action.Type == 'White Magic') then
             gFunc.EquipSet(gFunc.Combine(sets.MND, sets.EnfeeblingSkill));
         elseif (action.Type == 'Black Magic') then
