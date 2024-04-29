@@ -189,6 +189,11 @@ profile.HandleMidcast = function()
         elseif (string.match(action.Name, 'Paeon')) then
             gFunc.EquipSet(sets.String);
             gFunc.Equip('Range', 'Ebony Harp +1');
+        elseif (string.match(action.Name, 'Ballad')) then
+            gFunc.EquipSet(sets.Wind);
+            gFunc.Equip('Range', 'Cornette +1');
+            -- gFunc.EquipSet(sets.String);
+            -- gFunc.Equip('Range', 'Ebony Harp +1');
         elseif (string.match(action.Name, 'Mazurka')) then
             gFunc.EquipSet(sets.String);
             gFunc.Equip('Range', 'Ebony Harp +1');
