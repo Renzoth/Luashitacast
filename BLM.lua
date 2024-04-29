@@ -58,6 +58,7 @@ local sets = {
     ['EnhancingSkill'] = {
     },
     ['DarkSkill'] = {
+        Glove = 'Sorcerer\'s Gloves',
         Legs= 'Wizard\'s Tonban',
     },
     ['EnmityDown'] = {
