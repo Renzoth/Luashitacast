@@ -48,6 +48,7 @@ end
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
     local pet = gData.GetPet();
+    local petAction = gData.GetPetAction();
     local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
 
     if (myLevel ~= Settings.CurrentLevel) then
@@ -65,6 +66,13 @@ profile.HandleDefault = function()
         gFunc.EquipSet('Idle');
         if (player.IsMoving == false) then
             gFunc.Equip('Hands', 'Dusk Gloves');
+        end
+    end
+
+    if (pet ~= nil and petAction ~= nil) then
+        if (string.match(petAction.Name, 'Healing')) then
+            gFunc.Equip('Head', 'Wyrm Armet');
+            gFunc.Equip('Legs', 'Drachen Brais');
         end
     end
 end
