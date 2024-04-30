@@ -1,8 +1,8 @@
 local profile = {};
 local sets = {
     ['Idle_Priority'] = {
-        Main = {'Darksteel Pick +1', 'Viking Axe'},
-        Sub = {'Viking Axe', 'Barbaroi Axe'},
+        -- Main = {'Darksteel Pick +1', 'Viking Axe'},
+        -- Sub = {'Viking Axe', 'Barbaroi Axe'},
         Head = {'Emperor Hairpin'},
         Neck = {'Peacock Amulet'},
         Ear1 = {'Beastly Earring', 'Spike Earring'},
