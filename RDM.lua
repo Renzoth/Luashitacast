@@ -88,6 +88,7 @@ profile.Packer = {
 };
 
 local Settings = {
+    nin_mage = false;
     currentLevel = 0;
 }
 
@@ -95,6 +96,8 @@ profile.OnLoad = function()
     local player = gData.GetPlayer();
 
     gSettings.AllowAddSet = true;
+
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /mage /lac fwd mage');
 
     if (player.SubJob == 'WHM' or player.SubJob == 'BLM') then
         AshitaCore:GetChatManager():QueueCommand(1, '/macro book 2');
@@ -107,9 +110,20 @@ profile.OnLoad = function()
 end
 
 profile.OnUnload = function()
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /mage');
+
 end
 
 profile.HandleCommand = function(args)
+    if (args[1] == 'mage') then
+        if (Settings.nin_mage == true) then
+            gFunc.Message('/NIN MAGE OFF');
+            Settings.nin_mage = false;
+        else
+            gFunc.Message('/NIN MAGE ON');
+            Settings.nin_mage = true;
+        end
+    end
 end
 
 profile.HandleDefault = function()
@@ -130,7 +144,7 @@ profile.HandleDefault = function()
             gFunc.Equip('Back', 'Wizard\'s Mantle')
         end
 
-        if (player.SubJob ~= 'NIN') then
+        if (player.SubJob ~= 'NIN' or Settings.nin_mage == true) then
             gFunc.Equip('Main', 'Pluto\'s Staff');
         end
         
@@ -144,7 +158,11 @@ profile.HandleDefault = function()
         if (player.SubJob == 'WHM' or player.SubJob == 'BLM' or player.SubJob == 'DRK') then
             gFunc.EquipSet('Idle');
         elseif (player.SubJob == 'NIN') then
-            gFunc.EquipSet('IdleNin');
+            if (Settings.nin_mage == true) then
+                gFunc.EquipSet('Idle');
+            else
+                gFunc.EquipSet('IdleNin');
+            end
         end
     end
 
