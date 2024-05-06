@@ -249,7 +249,7 @@ profile.HandleMidcast = function()
         end
     end
 
-    if(conquest:GetInsideControl())
+    -- if(conquest:GetInsideControl())
 
     if (action.Skill ~= 'Enfeebling Magic' and action.Skill ~= 'Elemental Magic') then
         gFunc.EquipSet(sets.EnmityDown);
