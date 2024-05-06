@@ -75,8 +75,8 @@ local sets = {
         Ear1 = 'Melody Earring +1', -- +2
         Ear2 = 'Melody Earring +1', -- +2
         Waist = 'Corsette +1', -- +6
-        Ring1 = 'Tamas Ring', -- MACC+5
-        Ring2 = 'Light Ring', -- +5
+        Ring1 = 'Tamas Ring', -- MACC+5 +10
+        Ring2 = 'Luftpause Mark', -- MACC+3 +6
         Legs = 'Bard\'s Cannions', -- +7
         Feet = 'Savage Gaiters', -- +2
         Back = 'Jester\'s Cape +1', -- +10
@@ -134,7 +134,7 @@ profile.HandleDefault = function()
         
     end
 
-    if (string.match(env.Area, 'San d\'Oria') and not string.match(env.Area, 'Airship')) then
+    if (string.match(env.Area, 'San d\'Oria') and not string.match(env.Area, 'Airship') and not string.match(env.Area, 'Dynamis')) then
         gFunc.Equip('Body', 'Kingdom Aketon');
     end
 end
@@ -197,8 +197,16 @@ profile.HandleMidcast = function()
         elseif (string.match(action.Name, 'Mazurka')) then
             gFunc.EquipSet(sets.String);
             gFunc.Equip('Range', 'Ebony Harp +1');
+        elseif (string.match(action.Name, 'Requiem')) then
+            gFunc.EquipSet(gFunc.Combine(sets.CHR, sets.Wind));
+            if (env.RawWeatherElement == 'Dark') then
+                gFunc.Equip('Ear2', 'Diabolos\'s Earring');
+            end
         elseif (string.match(action.Name, 'Elegy')) then
             gFunc.EquipSet(gFunc.Combine(sets.CHR, sets.Wind));
+            if (env.RawWeatherElement == 'Dark') then
+                gFunc.Equip('Ear2', 'Diabolos\'s Earring');
+            end
             gFunc.Equip('Range', 'Horn +1');
             gFunc.Equip('Main', 'Terra\'s Staff');
         elseif (string.match(action.Name, 'Lullaby')) then
@@ -208,6 +216,9 @@ profile.HandleMidcast = function()
             else    
                 gFunc.EquipSet(gFunc.Combine(sets.CHR, sets.Wind));
                 gFunc.Equip('Range', 'Ryl.Spr. Horn');
+            end
+            if (env.RawWeatherElement == 'Dark') then
+                gFunc.Equip('Ear2', 'Diabolos\'s Earring');
             end
             gFunc.Equip('Main', 'Apollo\'s Staff');
         end
