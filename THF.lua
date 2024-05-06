@@ -46,8 +46,11 @@ local sets = {
     },
     ['INT'] = {
         Head = 'Rogue\'s Bonnet',
+        Body = 'Black Cotehardie',
         Ring1 = 'Tamas Ring',
         Ring2 = 'Snow Ring',
+        Ear1 = 'Morion Earring',
+        Ear2 = 'Morion Earring', 
     },
     ['SA'] = {
         Head = 'Assassin\'s Bonnet',
@@ -126,21 +129,23 @@ profile.HandleDefault = function()
         Settings.CurrentLevel = myLevel;
     end
 
-    if (sneak == 1 and trick == 1) then
+    if (sneak == 1) and (trick == 1) then
         gFunc.EquipSet(gFunc.Combine(sets.TA, sets.SA));
         return;
-    elseif (sneak == 1 and trick == 0) then
+    elseif (sneak == 1) and (trick == 0) then
         gFunc.EquipSet(sets.SA);
         return;
-    elseif (sneak == 0  and trick == 1) then
+    elseif (sneak == 0) and (trick == 1) then
         gFunc.EquipSet(sets.TA);
         return;
     else
         if (Settings.TH == false) and (Settings.eva == false) then
             gFunc.EquipSet(sets.Idle);
-            if (player.Status == 'Engaged' and player.IsMoving == false) then
+            if (player.Status == 'Engaged') and (player.IsMoving == false) then
                 gFunc.Equip('Hands', 'Dusk Gloves');
             end
+        elseif (Settings.TH == true) and (Settings.eva == true) then
+            gFunc.EquipSet(gFunc.Combine(sets.Idle, gFunc.Combine(sets.Evasion, sets.TreasureHunter))); -- I REGRET EVERYTHING
         elseif (Settings.TH == true) then
             gFunc.EquipSet(gFunc.Combine(sets.Idle, sets.TreasureHunter));
         elseif (Settings.eva == true) then
@@ -148,7 +153,7 @@ profile.HandleDefault = function()
         end
     end
 
-    if (string.match(env.Area, 'San d\'Oria') and not string.match(env.Area, 'Airship')) then
+    if (string.match(env.Area, 'San d\'Oria')) and not (string.match(env.Area, 'Airship')) then
         gFunc.Equip('Body', 'Kingdom Aketon');
     end
 end
