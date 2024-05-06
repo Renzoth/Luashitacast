@@ -1,4 +1,25 @@
+local fire_staff = 'Fire Staff'
+local earth_staff = 'Terra\'s Staff'
+local water_staff = 'Water Staff'
+local wind_staff = 'Auster\'s Staff'
+local ice_staff = 'Aquilo\'s Staff'
+local thunder_staff = 'Thunder Staff'
+local light_staff = 'Apollo\'s Staff'
+local dark_staff = 'Pluto\'s Staff'
+
+local ElementalStaffTable = {
+    ['Fire'] = fire_staff,
+    ['Earth'] = earth_staff,
+    ['Water'] = water_staff,
+    ['Wind'] = wind_staff,
+    ['Ice'] = ice_staff,
+    ['Thunder'] = thunder_staff,
+    ['Light'] = light_staff,
+    ['Dark'] = dark_staff
+}
+
 local profile = {};
+
 local sets = {
     ['Idle_Priority'] = {
         Main = {'Terra\'s Staff', 'Solid Wand', 'Yew Wand +1'},   
@@ -51,6 +72,8 @@ local sets = {
         Hands = 'Duelist\'s Gloves',
         Ring1 = 'Tamas Ring',
         Ring2 = 'Snow Ring',
+        Ear1 = 'Morion Earring',
+        Ear2 = 'Morion Earring', 
         Ammo = 'Phtm. Tathlum',
         Legs = 'Errant Slops',
         Waist = 'Penitent\'s Rope',
@@ -75,7 +98,7 @@ local sets = {
         Legs = 'Duelist\'s Tights',
         Ear1 = 'Moldavite Earring',
         Hands = 'Zenith Mitts',
-        Feet = 'Nashira Crackows',
+        Feet = 'Duelist\'s Boots',
     },
     ['EnhancingSkill'] = {
         Legs = 'Warlock\'s Tights',
@@ -189,28 +212,10 @@ profile.HandleMidcast = function()
     local player = gData.GetPlayer();
     local env = gData.GetEnvironment();
 
-    if (player.SubJob ~= 'NIN') then
-        if (action.Element == "Fire") then
-            gFunc.Equip('Main', 'Fire Staff');
-        elseif (action.Element == "Ice") then
-            gFunc.Equip('Main', 'Aquilo\'s Staff');
-        elseif (action.Element == "Wind") then
-            gFunc.Equip('Main', 'Auster\'s Staff');
-        elseif (action.Element == "Earth") then
-            if (action.Name == 'Stoneskin') then
-                gFunc.Equip('Main', 'Water Staff');
-            else
-                gFunc.Equip('Main', 'Terra\'s Staff');
-            end
-            
-        elseif (action.Element == "Thunder") then
-            gFunc.Equip('Main', 'Thunder Staff');
-        elseif (action.Element == "Water") then
-            gFunc.Equip('Main', 'Water Staff');
-        elseif (action.Element == "Light") then
-            gFunc.Equip('Main', 'Apollo\'s Staff');
-        elseif (action.Element == "Dark") then
-            gFunc.Equip('Main', 'Pluto\'s Staff');
+    if (player.SubJob ~= 'NIN' or Settings.nin_mage == true) then
+        local staff = ElementalStaffTable[action.Element]
+        if staff ~= '' then
+            gFunc.Equip('Main', staff)
         end
     end
 
@@ -228,17 +233,23 @@ profile.HandleMidcast = function()
         elseif (action.Type == 'Black Magic') then
             gFunc.EquipSet(gFunc.Combine(sets.INT, sets.EnfeeblingSkill));
         end
+        if (env.RawWeatherElement == 'Dark') then
+            gFunc.Equip('Ear2', 'Diabolos\'s Earring');
+        end
     elseif (action.Skill == 'Elemental Magic') then
         gFunc.EquipSet(gFunc.Combine(sets.INT, sets.ElementalSkill));
-        if (player.MPP <= 50) then
+        if (player.MppAftercast <= 50) then
             gFunc.Equip('Neck', 'Uggalepih Pendant');
         end
     elseif (action.Skill == 'Dark Magic') then
         gFunc.EquipSet(sets.INT);
         if (env.RawWeatherElement == 'Dark') then
             gFunc.Equip('Main', 'Diabolos\'s Pole');
+            gFunc.Equip('Ear2', 'Diabolos\'s Earring');
         end
     end
+
+    if(conquest:GetInsideControl())
 
     if (action.Skill ~= 'Enfeebling Magic' and action.Skill ~= 'Elemental Magic') then
         gFunc.EquipSet(sets.EnmityDown);
