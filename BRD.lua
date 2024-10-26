@@ -1,6 +1,6 @@
 local profile = {};
 local sets = {
-    ['HPDOWN'] = {
+    ['HP_DOWN'] = {
         Main = 'Terra\'s Staff',
         Range = 'Cornette +1',
         Head = 'Zenith Crown',
@@ -10,54 +10,46 @@ local sets = {
         Body = 'Black Cotehardie',
         Hands = 'Zenith Mitts',
         Ring1 = 'Astral Ring',
-        Ring2 = 'Astral Ring',
+        Ring2 = 'Ether Ring',
         Back = 'Jester\'s Cape +1',
-        Waist = 'Penitent\'s Rope',
+        Waist = 'Scouter\'s Rope',
         Legs = 'Zenith Slacks',
         Feet = 'Errant Pigaches',
     },
     ['Idle'] = {
         Main = 'Terra\'s Staff',
         Range = 'Cornette +1',
-        Head = 'Demon Helm',
+        Head = 'Bard\'s Roundlet',
         Neck = 'Wind Torque',
         Ear1 = 'Magnetic Earring',
         Ear2 = 'Loquac. Earring',
         Body = 'Sha\'ir Manteel',
         Hands = 'Dst. Mittens +1',
         Ring2 = 'Merman\'s Ring',
-        Ring1 = 'Merman\'s Ring',
+        Ring1 = 'Minstrel\'s Ring',
         Back = 'Jester\'s Cape +1',
         Waist = 'Corsette +1',
         Legs = 'Dst. Subligar +1',
         Feet = 'Dst. Leggings +1'
     },
     ['Refresh'] = {
-        Main = 'Terra\'s Staff',
-        Range = 'Cornette +1',
-        Neck = 'Wind Torque',
-        Ear1 = 'Magnetic Earring',
-        Ear2 = 'Loquac. Earring',
+        Head = 'Remove',
         Body = 'Vermillion Cloak',
-        Hands = 'Dst. Mittens +1',
-        Ring2 = 'Merman\'s Ring',
-        Ring1 = 'Merman\'s Ring',
-        Back = 'Jester\'s Cape +1',
-        Waist = 'Corsette +1',
-        Legs = 'Dst. Subligar +1',
-        Feet = 'Dst. Leggings +1'
     },
-    ['Song_Precast'] = {
+    ['HP_UP'] = {
+        Head = 'Genbu\'s Kabuto',
         Body = 'Savage Separates',
         Neck = 'Bloodbead Amulet',
-        Body = 'Sha\'ir Manteel',
+        Back = 'Gigant Mantle',
+        Ear1 = 'Pigeon Earring',
+        Ear2 = 'Pigeon Earring',
         Ring1 = 'Minstrel\'s Ring',
         Ring2 = 'Bomb Queen Ring',
-        Legs = 'Bard\'s Cannions',
+        Legs = 'Sha\'ir Seraweels',
         Feet = 'Savage Gaiters',
     },
     ['Singing'] = {
-        Head = 'Demon Helm',
+        Head = 'Bard\'s Roundlet',
         Hands = 'Chl. Cuffs +1',
     },
     ['Wind'] = {
@@ -65,11 +57,11 @@ local sets = {
         Legs = 'Choral Cannions',
     },
     ['String'] = {
-
+        Feet = 'Bard\'s Slippers',
     },
     -- 64 + 54
     ['CHR'] = { -- AND MACC
-        Head = 'Errant Hat', -- +3
+        Head = 'Bard\'s Roundlet', -- +3
         Body = 'Errant Hpl.', -- +10
         Hands = 'Chl. Cuffs +1', -- +7
         Ear1 = 'Melody Earring +1', -- +2
@@ -125,18 +117,15 @@ profile.HandleDefault = function()
         gFunc.Equip('Main', 'Dark Staff');
         gFunc.Equip('Body', 'Errant Hpl.');
     else
-        
-        if (player.MPP <= 70) then
-            gFunc.EquipSet(sets.Refresh);
-        else
-            gFunc.EquipSet(sets.Idle);
+        gFunc.EquipSet(sets.Idle);
+        if (player.MPP < 75) then
+            gFunc.EquipSet(gFunc.Combine(sets.Idle, sets.Refresh));
         end
-        
     end
 
-    if (string.match(env.Area, 'San d\'Oria') and not string.match(env.Area, 'Airship') and not string.match(env.Area, 'Dynamis')) then
-        gFunc.Equip('Body', 'Kingdom Aketon');
-    end
+    -- if (string.match(env.Area, 'San d\'Oria') and not string.match(env.Area, 'Airship') and not string.match(env.Area, 'Dynamis')) then
+    --     gFunc.Equip('Body', 'Kingdom Aketon');
+    -- end
 end
 
 profile.HandleAbility = function()
@@ -158,22 +147,20 @@ profile.HandlePrecast = function()
     if (spell.Skill == 'Singing') then
         local player = gData.GetPlayer();
         if (player.HPP > 75) then
-            gFunc.ForceEquipSet('HPDOWN');
+            gFunc.ForceEquipSet('HP_DOWN');
         end
 
-        gFunc.EquipSet('Song_Precast');
+        gFunc.EquipSet('HP_UP');
     end
-    
-    
 end
 
 profile.HandleMidcast = function()
     local action = gData.GetAction();
     local player = gData.GetPlayer();
+    local env = gData.GetEnvironment();
 
+    gFunc.Message(action.Element);
     if (action.Type == 'Bard Song') then
-        gFunc.Message(action.Skill)
-
         if (string.match(action.Name, 'Minuet')) then
             gFunc.EquipSet(sets.Wind);
             gFunc.Equip('Range', 'Cornette +1');
