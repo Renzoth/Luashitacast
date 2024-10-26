@@ -132,7 +132,7 @@ profile.HandleDefault = function()
                 if (env.RawWeatherElement == 'Fire') then
                     gFunc.Equip('Head', 'Summoner\'s Horn');
                 end
-                gFunc.Equip('Main', 'Fire Staff');
+                gFunc.Equip('Main', 'Vulcan\'s Staff');
                 -- END IFRIT
             elseif (pet.Name == 'Fenrir') or (pet.Name == 'Diabolos') then
                 -- FENRIR DIABOLOS
@@ -162,7 +162,7 @@ profile.HandleDefault = function()
                 if (env.RawWeatherElement == 'Water') then
                     gFunc.Equip('Head', 'Summoner\'s Horn');
                 end
-                gFunc.Equip('Main', 'Water Staff');
+                gFunc.Equip('Main', 'Neptune\'s Staff');
                 -- END LEVIATHAN
             elseif (pet.Name == 'Ramuh') then
                 -- RAMUH
@@ -172,7 +172,7 @@ profile.HandleDefault = function()
                 if (env.RawWeatherElement == 'Thunder') then
                     gFunc.Equip('Head', 'Summoner\'s Horn');
                 end
-                gFunc.Equip('Main', 'Lightning Staff');
+                gFunc.Equip('Main', 'Jupiter\'s Staff');
                 -- END RAMUH
             elseif (pet.Name == 'LightSpirit') then
                 gFunc.Equip('Main', 'Apollo\'s Staff');
