@@ -1,8 +1,8 @@
 local profile = {};
 local sets = {
     ['Idle_Priority'] = {
-        Main = {'Blau Dolch', 'Trailer\'s Kukri', 'Marauder\'s Knife', 'Mrc.Cpt. Kukri', 'Decurion\'s Dagger'},
-        Sub = {'Thief\'s Knife', 'Bone Knife +1', 'Mrc.Cpt. Kukri', 'Decurion\'s Dagger'},
+        -- Main = {'Blau Dolch', 'Trailer\'s Kukri', 'Marauder\'s Knife', 'Mrc.Cpt. Kukri', 'Decurion\'s Dagger'},
+        -- Sub = {'Thief\'s Knife', 'Bone Knife +1', 'Mrc.Cpt. Kukri', 'Decurion\'s Dagger'},
         Range = {'Arbalest +1', 'Zamburak +1', 'Power Crossbow'},
         Head = {'Optical Hat', 'Emperor Hairpin'},
         Neck = {'Peacock Amulet', 'Spike Necklace'},
@@ -29,11 +29,10 @@ local sets = {
         Head = 'Emperor Hairpin',
         Body = 'Scp. Harness +1',
         Hands = 'War Gloves',
+        Feet = 'Dance Shoes +1',
         Back = 'Bat Cape',
         Neck = 'Evasion Torque',
         Waist = 'Scouter\'s Rope',
-        Ear1 = 'Drone Earring',
-        Ear2 = 'Drone Earring',
     },
     ['RATK'] = {
         Head = 'Optical Hat',
@@ -41,8 +40,6 @@ local sets = {
         Hands = 'Noct Gloves',
         Ring1 = 'Scorpion Ring +1',
         Ring2 = 'Scorpion Ring +1',
-        Ear1 = 'Drone Earring',
-        Ear2 = 'Drone Earring',
     },
     ['INT'] = {
         Head = 'Rogue\'s Bonnet',
