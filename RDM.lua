@@ -1,9 +1,9 @@
-local fire_staff = 'Fire Staff'
+local fire_staff = 'Vulcan\'s Staff'
 local earth_staff = 'Terra\'s Staff'
-local water_staff = 'Water Staff'
+local water_staff = 'Neptune\'s Staff'
 local wind_staff = 'Auster\'s Staff'
 local ice_staff = 'Aquilo\'s Staff'
-local thunder_staff = 'Thunder Staff'
+local thunder_staff = 'Jupiter\'s Staff'
 local light_staff = 'Apollo\'s Staff'
 local dark_staff = 'Pluto\'s Staff'
 
@@ -25,7 +25,7 @@ local sets = {
         Main = {'Terra\'s Staff', 'Solid Wand', 'Yew Wand +1'},   
         -- Sub = {'Maple Shield'},
         Ammo = {'Hedgehog Bomb'},
-        Head = {'Duelist\'s Chapeau', 'Bastokan Circlet'},
+        Head = {'Dls. Chapeau +1', 'Bastokan Circlet'},
         Neck = {'Promise Badge', 'Justice Badge'},
         Ear1 = {'Loquac. Earring', 'Energy Earring'},
         Ear2 = {'Magnetic Earring', 'Energy Earring'},
@@ -41,7 +41,7 @@ local sets = {
     ['IdleNin_Priority'] = {
         Main = {'Blau Dolch'},   
         Sub = {'Joyeuse'},
-        Head = {'Duelist\'s Chapeau', 'Emperor Hairpin'},
+        Head = {'Dls. Chapeau +1', 'Emperor Hairpin'},
         Neck = {'Peacock Amulet'},
         Ear1 = {'Brutal Earring', 'Spike Earring', 'Energy Earring'},
         Ear2 = {'Stealth Earring', 'Spike Earring', 'Energy Earring'},
@@ -52,7 +52,7 @@ local sets = {
         Back = {'Amemet Mantle +1', 'White Cape +1'},
         Waist = {'Swift Belt', 'Friar\'s Rope'},
         Legs = {'Warlock\'s Tights', 'Savage Loincloth'},
-        Feet = {'Bounding Boots'},
+        Feet = {'Nashira Crackows', 'Bounding Boots'},
     },
     ['MND'] = {
         Body = 'Errant Hpl.',
@@ -82,7 +82,7 @@ local sets = {
     ['EnfeeblingSkill'] = {
         Body = 'Warlock\'s Tabard',
         Neck = 'Enfeebling Torque',
-        Head = 'Duelist\'s Chapeau',
+        Head = 'Dls. Chapeau +1',
         Ring1 = 'Tamas Ring',
     },
     ['HealingSkill'] = {
@@ -103,6 +103,8 @@ local sets = {
     ['EnhancingSkill'] = {
         Legs = 'Warlock\'s Tights',
         Hands = 'Duelist\'s Gloves',
+    },
+    ['DarkSkill'] = {
     },
 };
 profile.Sets = sets;
@@ -178,14 +180,14 @@ profile.HandleDefault = function()
             gFunc.Equip('Hands', 'Dusk Gloves');
         end
     else
-        if (player.SubJob == 'WHM' or player.SubJob == 'BLM' or player.SubJob == 'DRK') then
-            gFunc.EquipSet('Idle');
-        elseif (player.SubJob == 'NIN') then
+        if (player.SubJob == 'NIN') then
             if (Settings.nin_mage == true) then
                 gFunc.EquipSet('Idle');
             else
                 gFunc.EquipSet('IdleNin');
             end
+        else
+            gFunc.EquipSet('Idle');
         end
     end
 
@@ -238,14 +240,19 @@ profile.HandleMidcast = function()
         end
     elseif (action.Skill == 'Elemental Magic') then
         gFunc.EquipSet(gFunc.Combine(sets.INT, sets.ElementalSkill));
-        if (player.MppAftercast <= 50) then
+        if (action.MppAftercast <= 50) then
             gFunc.Equip('Neck', 'Uggalepih Pendant');
         end
     elseif (action.Skill == 'Dark Magic') then
-        gFunc.EquipSet(sets.INT);
+        gFunc.EquipSet(gFunc.Combine(sets.INT, sets.DarkSkill));
         if (env.RawWeatherElement == 'Dark') then
-            gFunc.Equip('Main', 'Diabolos\'s Pole');
             gFunc.Equip('Ear2', 'Diabolos\'s Earring');
+        end
+        if (action.Name == 'Drain') or (action.Name == 'Aspir') then
+            if (env.RawWeatherElement == 'Dark') then
+                gFunc.Equip('Main', 'Diabolos\'s Pole');
+            end
+            gFunc.Equip('Main', 'Overlord\'s Ring');
         end
     end
 
