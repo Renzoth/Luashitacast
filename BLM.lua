@@ -1,9 +1,9 @@
-local fire_staff = 'Fire Staff'
+local fire_staff = 'Vulcan\'s Staff'
 local earth_staff = 'Terra\'s Staff'
-local water_staff = 'Water Staff'
+local water_staff = 'Neptune\'s Staff'
 local wind_staff = 'Auster\'s Staff'
 local ice_staff = 'Aquilo\'s Staff'
-local thunder_staff = 'Thunder Staff'
+local thunder_staff = 'Jupiter\'s Staff'
 local light_staff = 'Apollo\'s Staff'
 local dark_staff = 'Pluto\'s Staff'
 
@@ -25,7 +25,7 @@ local sets = {
         Main = {'Terra\'s Staff', 'Solid Wand', 'Yew Wand +1'},   
         -- Sub = {'Maple Shield'},
         Ammo = {'Phtm. Tathlum', 'Morion Tathlum'},
-        Head = {'Demon Helm', 'Wizard\'s Petasos', 'Seer\'s Crown +1'},
+        Head = {'Sorcerer\'s Petas.', 'Wizard\'s Petasos', 'Seer\'s Crown +1'},
         Neck = {'Elemental Torque', 'Philomath Stole', 'Black Neckerchief'},
         Ear1 = {'Loquac. Earring', 'Moldavite Earring'},
         Ear2 = {'Magnetic Earring', 'Morion Earring'},
@@ -55,13 +55,15 @@ local sets = {
         Legs = 'Errant Slops',
         Feet = 'Rostrum Pumps',
         Ring1 = 'Tamas Ring',
-        Ring2 = 'Snow Ring',
+        -- Ring2 = 'Snow Ring',
+        Ring2 = 'Sorcerer\'s Ring',
         Ear1 = 'Morion Earring',
         Ear2 = 'Morion Earring', 
         Ammo = 'Phtm. Tathlum',
         Waist = 'Penitent\'s Rope',
     },
     ['EnfeeblingSkill'] = {
+        Head = 'Sorcerer\'s Petas.',
         Body = 'Wizard\'s Coat',
         Neck = 'Enfeebling Torque',
         Ring1 = 'Tamas Ring',
@@ -70,6 +72,7 @@ local sets = {
         Neck = 'Healing Torque',
     },
     ['ElementalSkill'] = { -- and MAB
+        Head = 'Sorcerer\'s Petas.',
         Neck = 'Elemental Torque',
         Body = 'Igqira Weskit',
         Hands = 'Wizard\'s Gloves',
@@ -81,12 +84,39 @@ local sets = {
     ['EnhancingSkill'] = {
     },
     ['DarkSkill'] = {
+        Neck = "Dark Torque",
         Glove = 'Sorcerer\'s Gloves',
-        Legs= 'Wizard\'s Tonban',
+        Legs = 'Wizard\'s Tonban',
     },
     ['EnmityDown'] = {
         Head = 'Raven Beret',
         Back = 'Errant Cape',
+    },
+    ['Song_Precast'] = {
+        Body = 'Savage Separates',
+        Neck = 'Bloodbead Amulet',
+        Body = 'Sha\'ir Manteel',
+        Back = 'Gigant Mantle',
+        Ring1 = 'Minstrel\'s Ring',
+        Ring2 = 'Bomb Queen Ring',
+        Legs = 'Bard\'s Cannions',
+        Feet = 'Savage Gaiters',
+    },
+    ['HPDOWN'] = {
+        Main = 'Terra\'s Staff',
+        Range = 'Cornette +1',
+        Head = 'Zenith Crown',
+        Neck = 'Star Necklace',
+        Ear1 = 'Magnetic Earring',
+        Ear2 = 'Loquac. Earring',
+        Body = 'Black Cotehardie',
+        Hands = 'Zenith Mitts',
+        Ring1 = 'Ether Ring',
+        Ring2 = 'Astral Ring',
+        Back = 'Jester\'s Cape +1',
+        Waist = 'Penitent\'s Rope',
+        Legs = 'Zenith Slacks',
+        Feet = 'Errant Pigaches',
     },
 };
 profile.Sets = sets;
@@ -146,18 +176,30 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
+    local spell = gData.GetAction();
+
     gFunc.Equip('Ear1', 'Loquac. Earring');
     gFunc.Equip('Feet', 'Rostrum Pumps');
+
+    if (spell.Skill == 'Elemental Magic') then
+        local player = gData.GetPlayer();
+        if (player.HPP >= 75) then
+            gFunc.ForceEquipSet('HPDOWN');
+        end
+
+        gFunc.EquipSet('Song_Precast');
+    end
 end
 
 profile.HandleMidcast = function()
     local action = gData.GetAction();
     local player = gData.GetPlayer();
+    local env = gData.GetEnvironment();
 
     local staff = ElementalStaffTable[action.Element]
-        if staff ~= '' then
-            gFunc.Equip('Main', staff)
-        end
+    if staff ~= '' then
+        gFunc.Equip('Main', staff)
+    end
 
     if (action.Skill == 'Enhancing Magic') then
         if (action.Name == 'Stoneskin') then
@@ -188,6 +230,14 @@ profile.HandleMidcast = function()
         gFunc.ForceEquipSet(gFunc.Combine(sets.INT, sets.ElementalSkill));
         if (action.MppAftercast <= 50) then
             gFunc.Equip('Neck', 'Uggalepih Pendant');
+        end
+
+        if (env.RawWeatherElement == 'Ice') or (env.DayElement == 'Ice') then
+            gFunc.Equip('Waist', 'Hyorin Obi');
+        end
+
+        if (player.HPP <= 75) then
+            gFunc.Equip('Ring2', 'Sorcerer\'s Ring');
         end
         
     elseif (action.Skill == 'Dark Magic') then
