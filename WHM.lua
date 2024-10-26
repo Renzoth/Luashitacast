@@ -60,6 +60,23 @@ local sets = {
         Legs = 'Healer\'s Pantaln.',
         Neck = 'Divine Torque',
     },
+    ['idle_NIN'] = {
+        Main = 'Darksteel Maul',
+        Sub = 'Darksteel Maul',
+        Ammo = 'Hedgehog Bomb',
+        Head = 'Optical Hat',
+        Neck = 'Peacock Amulet',
+        Ear1 = 'Brutal Earring',
+        Ear2 = 'Stealth Earring',
+        Body = 'Reverend Mail',
+        Hands = 'Nashira Gages',
+        Ring1 = 'Sniper\'s Ring',
+        Ring2 = 'Sniper\'s Ring',
+        Back = 'Errant Cape',
+        Waist = 'Swift Belt',
+        Legs = 'Blessed Trousers',
+        Feet = 'Nashira Crackows',
+    },
 };
 profile.Sets = sets;
 
@@ -95,11 +112,17 @@ profile.HandleDefault = function()
         gFunc.Equip('Neck', 'Checkered Scarf');
         gFunc.Equip('Body', 'Errant Hpl.');
         gFunc.Equip('Main', 'Pluto\'s Staff');
+        gFunc.Equip('Waist', 'Cleric\'s Belt');
         if (player.SubJob == 'BLM') then
             gFunc.Equip('Back', 'Wizard\'s Mantle')
         end
     else
-        gFunc.EquipSet('Idle');
+        if (player.SubJob == 'NIN') then
+            gFunc.EquipSet('idle_NIN');
+        else
+            gFunc.EquipSet('Idle');
+        end
+            
     end
 
     if (pet ~= nil) then
@@ -123,8 +146,11 @@ profile.HandleItem = function()
 end
 
 profile.HandlePrecast = function()
-    gFunc.Equip('Head', 'Warlock\'s Chapeau');
-    gFunc.Equip('Body', 'Duelist\'s Tabard');
+    local action = gData.GetAction();
+
+    if (string.match(action.Name, 'Cure')) then
+        gFunc.Equip('Feet', 'Cure Clogs');
+    end
     gFunc.Equip('Ear1', 'Loquac. Earring');
 end
 
